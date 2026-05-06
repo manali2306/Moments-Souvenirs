@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sun: #FFD93D;
+  --coral: #FF6B6B;
+  --teal: #06D6A0;
+  --ocean: #118AB2;
+  --palm: #2D6A4F;
+  --sand: #FFF3CD;
+  --mango: #FF9F1C;
+  --sky: #E0F4FF;
+  --white: #FFFFFF;
+  --dark: #1A2E22;
+  --card-bg: rgba(255,255,255,0.95);
+  --tropical-pink: #FF8FAB;
+  --beach-blue: #4ECDC4;
+  --sunset-orange: #FF8C42;
+  --palm-green: #228B22;
+  --wave-blue: #00BFFF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(160deg, #FAF8F4 0%, #EDE6DA 35%, #E2D9CC 65%, #EDE8E0 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--dark);
+  overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(210,198,182,0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 75%, rgba(220,210,195,0.35) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(240,235,225,0.25) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* FLOATING ELEMENTS */
+.bg-decor {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.bubble {
+  position: absolute; border-radius: 50%;
+  background: rgba(190,178,162,0.12);
+  animation: floatUp 15s infinite ease-in-out;
+  backdrop-filter: blur(1px);
+}
+.bubble:nth-child(odd) {
+  background: rgba(205,195,180,0.10);
+}
+@keyframes floatUp {
+  0%,100% { transform: translateY(0) scale(1) rotate(0deg); }
+  25% { transform: translateY(-40px) scale(1.1) rotate(90deg); }
+  50% { transform: translateY(-80px) scale(0.9) rotate(180deg); }
+  75% { transform: translateY(-40px) scale(1.05) rotate(270deg); }
+}
+
+/* PALM TREES */
+.palm-tree {
+  position: absolute;
+  bottom: 20px;
+  font-size: 60px;
+  opacity: 0.08;
+  pointer-events: none;
+  animation: sway 10s infinite ease-in-out;
+  color: var(--palm-green);
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+}
+.palm-tree.left {
+  left: -20px;
+  transform: scale(0.8);
+}
+.palm-tree.right {
+  right: -20px;
+  transform: scale(0.6) scaleX(-1);
+}
+@keyframes sway {
+  0%,100% { transform: scale(0.8) rotate(0deg); }
+  25% { transform: scale(0.8) rotate(1deg); }
+  50% { transform: scale(0.8) rotate(-1deg); }
+  75% { transform: scale(0.8) rotate(0.5deg); }
+}
+
+/* HEADER */
+.header {
+  position: relative; z-index: 10;
+  text-align: center;
+  padding: 32px 16px 20px;
+  animation: fadeDown 0.8s ease;
+  background: rgba(255,255,255,0.48);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 0 0 30px 30px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(190,175,155,0.28);
+  box-shadow: 0 4px 24px rgba(120,100,80,0.07);
+}
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.header .trip-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 36px;
+  background: linear-gradient(45deg, #8B6F47, #B5845A, #7A6252);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  animation: glow 3s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  from { filter: drop-shadow(0 0 4px rgba(139,111,71,0.15)); }
+  to { filter: drop-shadow(0 0 10px rgba(139,111,71,0.28)); }
+}
+.header .trip-sub {
+  font-size: 16px; color: #7A6A58;
+  font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+  text-shadow: none;
+}
+.header .couple-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.55);
+  border: 1.5px solid rgba(190,175,158,0.5);
+  border-radius: 30px; padding: 8px 18px;
+  color: #5E4E3E; font-size: 14px; font-weight: 700;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(120,100,80,0.08);
+  transition: all 0.3s ease;
+}
+.header .couple-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* STATS BAR */
+.stats-bar {
+  display: flex; gap: 12px; overflow-x: auto;
+  padding: 0 16px 18px; position: relative; z-index: 10;
+  scrollbar-width: none;
+}
+.stats-bar::-webkit-scrollbar { display: none; }
+.stat-pill {
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.55);
+  border: 1.5px solid rgba(190,175,158,0.4);
+  border-radius: 25px; padding: 10px 18px;
+  text-align: center; color: #5E4E3E;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(120,100,80,0.08);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.8s ease both;
+}
+.stat-pill:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(120,100,80,0.12);
+  background: rgba(255,255,255,0.72);
+}
+.stat-pill .sv {
+  font-size: 20px; font-weight: 800;
+  display: block;
+  background: linear-gradient(45deg, #8B6F47, #B5845A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-pill .sl {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.75;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* NAV TABS */
+.nav-tabs {
+  display: flex; gap: 8px; padding: 0 16px 16px;
+  overflow-x: auto; position: relative; z-index: 10;
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex-shrink: 0; padding: 10px 20px;
+  border-radius: 30px; font-size: 14px; font-weight: 800;
+  cursor: pointer; border: 1.5px solid rgba(190,175,158,0.45);
+  background: rgba(255,255,255,0.5);
+  color: #6B5A48;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(120,100,80,0.07);
+  text-shadow: none;
+}
+.nav-tab.active {
+  background: linear-gradient(135deg, #8B6F47, #A0805A);
+  color: #FAF8F4;
+  border-color: #8B6F47;
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 22px rgba(139,111,71,0.28);
+}
+.nav-tab:hover:not(.active) {
+  background: rgba(255,255,255,0.72);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(120,100,80,0.10);
+}
+
+/* CONTENT */
+.content { padding: 0 16px 80px; position: relative; z-index: 10; }
+.tab-pane { display: none; animation: slideUp 0.35s ease; }
+.tab-pane.active { display: block; }
+@keyframes slideUp { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
+
+/* DAY CARDS */
+.day-section-label {
+  font-family: 'Pacifico', cursive;
+  font-size: 18px;
+  margin: 24px 0 12px; letter-spacing: 0.5px;
+  background: linear-gradient(45deg, #7A5C38, #A07850, #6B5040);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2s ease-in-out infinite alternate;
+}
+@keyframes shimmer {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.1) saturate(1.2); }
+}
+.day-card {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-radius: 20px; margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(120,100,80,0.08), 0 1px 0 rgba(255,255,255,0.9) inset;
+  border: 1px solid rgba(200,185,168,0.38);
+  transition: all 0.35s ease;
+  position: relative;
+}
+.day-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #C4B09A, #A89080, #C4B09A);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.day-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(120,100,80,0.12), 0 1px 0 rgba(255,255,255,0.9) inset;
+}
+.day-card:hover::before { opacity: 1; }
+.day-card.open {
+  box-shadow: 0 8px 28px rgba(120,100,80,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
+}
+.day-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 18px; cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+.day-card.open .day-header {
+  border-color: rgba(190,175,155,0.22);
+}
+.day-circle {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  flex-shrink: 0; font-weight: 800; line-height: 1;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  border: 3px solid rgba(255,255,255,0.8);
+  transition: all 0.3s ease;
+}
+.day-circle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.day-circle .dc-num { font-size: 20px; }
+.day-circle .dc-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
+.day-info { flex: 1; }
+.day-info h3 {
+  font-size: 16px; font-weight: 800; color: var(--dark);
+  margin-bottom: 4px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+.day-info .day-date {
+  font-size: 12px; color: #666; font-weight: 700; margin-bottom: 4px;
+}
+.day-info .day-location {
+  font-size: 13px; font-weight: 600;
+  color: #8A7060;
+}
+.day-toggle {
+  font-size: 20px; transition: all 0.4s ease;
+  flex-shrink: 0;
+  color: var(--dark);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+.day-card.open .day-toggle { transform: rotate(180deg) scale(1.1); }
+.day-body {
+  display: none; padding: 6px 18px 16px;
+  animation: slideDown 0.4s ease;
+}
+.day-card.open .day-body { display: block; }
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* EVENTS */
+.event-item {
+  display: flex; gap: 14px; padding: 11px 0;
+  border-bottom: 1px solid rgba(190,175,155,0.18);
+  transition: all 0.25s ease;
+  border-radius: 12px;
+  margin-bottom: 2px;
+}
+.event-item:hover {
+  background: rgba(255,255,255,0.45);
+  transform: translateX(3px);
+  padding-left: 8px;
+  border-radius: 10px;
+  border-bottom-color: transparent;
+}
+.event-item:last-child { border-bottom: none; }
+.event-icon {
+  width: 38px; height: 38px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0; margin-top: 2px;
+  box-shadow: 0 2px 8px rgba(120,100,80,0.10);
+  border: 1px solid rgba(200,185,168,0.35);
+  transition: all 0.25s ease;
+}
+.event-icon:hover { transform: scale(1.08); }
+.event-content { flex: 1; }
+.event-time {
+  font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+  margin-bottom: 3px; color: #9A8878;
+}
+.event-title {
+  font-size: 13.5px; font-weight: 700; color: #3A2E24;
+  margin-bottom: 3px;
+}
+.event-desc {
+  font-size: 12px; color: #7A6A58; margin-bottom: 6px; line-height: 1.6; font-weight: 400;
+}
+.event-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.etag {
+  font-size: 10px; font-weight: 600; padding: 2px 9px; border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.07);
+  transition: all 0.2s ease;
+}
+.etag:hover { transform: scale(1.04); }
+
+/* FLIGHT CARD */
+.flight-card {
+  background: rgba(255,255,255,0.58);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-radius: 20px; padding: 20px; margin-bottom: 14px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(120,100,80,0.09), 0 1px 0 rgba(255,255,255,0.9) inset;
+  border: 1px solid rgba(200,185,168,0.38);
+  transition: all 0.3s ease;
+}
+.flight-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(120,100,80,0.12), 0 1px 0 rgba(255,255,255,0.9) inset;
+}
+.flight-card::before {
+  content: '✈'; position: absolute; right: -10px; top: 50%;
+  transform: translateY(-50%); font-size: 80px; opacity: 0.05;
+  animation: fly 4s ease-in-out infinite;
+}
+@keyframes fly {
+  0%,100% { transform: translateY(-50%) translateX(0); }
+  50% { transform: translateY(-50%) translateX(-8px); }
+}
+.flight-route {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.flight-city { font-size: 24px; font-weight: 700; color: #3A2E24; }
+.flight-code { font-size: 11.5px; font-weight: 600; color: #8A7A6A; }
+.flight-arrow {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  flex: 1; margin: 0 14px;
+}
+.flight-line {
+  width: 100%; height: 1.5px; background: rgba(180,165,148,0.45);
+  position: relative; border-radius: 2px;
+}
+.flight-line::after {
+  content: '✈'; position: absolute; right: -8px; top: 50%;
+  transform: translateY(-50%); font-size: 15px; color: #8A7060;
+  animation: planeMove 3s ease-in-out infinite;
+}
+@keyframes planeMove {
+  0% { right: -8px; }
+  50% { right: 20px; }
+  100% { right: -8px; }
+}
+.flight-duration { font-size: 10.5px; font-weight: 600; color: #9A8878; }
+.flight-meta { display: flex; gap: 18px; }
+.fm { text-align: center; }
+.fm-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #9A8878; }
+.fm-val { font-size: 13.5px; font-weight: 700; color: #3A2E24; }
+.transit-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(190,175,155,0.4);
+  border-radius: 10px; padding: 3px 12px;
+  font-size: 11px; font-weight: 600; color: #7A6A58; margin-top: 10px;
+  backdrop-filter: blur(8px);
+}
+
+/* TIPS CARD */
+.tip-card {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-radius: 16px;
+  padding: 14px 16px; margin-bottom: 10px;
+  border: 1px solid rgba(200,185,168,0.35);
+  box-shadow: 0 3px 14px rgba(120,100,80,0.07);
+  display: flex; gap: 12px; align-items: flex-start;
+  transition: all 0.25s ease;
+}
+.tip-card:hover {
+  background: rgba(255,255,255,0.72);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(120,100,80,0.10);
+}
+.tip-emoji { font-size: 22px; flex-shrink: 0; }
+.tip-text h4 { font-size: 13px; font-weight: 700; color: #3A2E24; margin-bottom: 3px; }
+.tip-text p { font-size: 12px; color: #7A6A58; line-height: 1.55; font-weight: 400; }
+
+/* WEATHER CARD */
+.weather-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.weather-card {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-radius: 18px; padding: 16px;
+  border: 1px solid rgba(200,185,168,0.35);
+  box-shadow: 0 4px 18px rgba(120,100,80,0.08);
+  text-align: center; transition: all 0.25s ease;
+}
+.weather-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(120,100,80,0.12);
+  background: rgba(255,255,255,0.70);
+}
+.weather-card .wc-icon { font-size: 34px; margin-bottom: 8px; }
+.weather-card .wc-place { font-size: 13.5px; font-weight: 700; color: #3A2E24; margin-bottom: 4px; }
+.weather-card .wc-temp {
+  font-size: 24px; font-weight: 700; color: #8B6040; margin-bottom: 4px;
+}
+.weather-card .wc-desc { font-size: 11.5px; color: #8A7A6A; margin-bottom: 6px; }
+.weather-card .wc-stat { font-size: 11.5px; font-weight: 600; color: #7A6A58; }
+
+/* PACK LIST */
+.pack-section { margin-bottom: 16px; }
+.pack-section h4 {
+  font-size: 13.5px; font-weight: 700; color: #5E4E3E;
+  margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+.pack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pack-item {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 10px 12px; display: flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(200,185,168,0.35);
+  box-shadow: 0 2px 8px rgba(120,100,80,0.06);
+  cursor: pointer; transition: all 0.2s;
+}
+.pack-item:hover { background: rgba(255,255,255,0.72); }
+.pack-item.checked {
+  background: rgba(210,220,210,0.45);
+  border-color: rgba(140,170,140,0.35);
+}
+.pack-item .pi-icon { font-size: 17px; flex-shrink: 0; }
+.pack-item .pi-text { font-size: 12px; font-weight: 600; color: #4A3A2E; }
+.pack-item .pi-check {
+  margin-left: auto; width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid rgba(180,165,148,0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; flex-shrink: 0; transition: all 0.2s;
+}
+.pack-item.checked .pi-check { background: #8A9A88; border-color: #8A9A88; color: white; }
+
+/* BUDGET */
+.budget-total {
+  background: rgba(255,255,255,0.60);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-radius: 20px; padding: 22px 24px; margin-bottom: 16px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(120,100,80,0.09), 0 1px 0 rgba(255,255,255,0.95) inset;
+  border: 1px solid rgba(200,185,168,0.38);
+  transition: all 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.budget-total:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(120,100,80,0.12), 0 1px 0 rgba(255,255,255,0.95) inset;
+}
+.budget-total::before {
+  content: '💰'; position: absolute; right: -16px; top: 50%;
+  transform: translateY(-50%); font-size: 56px; opacity: 0.06;
+}
+.budget-total .bt-label {
+  font-size: 11px; font-weight: 700; color: #9A8878;
+  text-transform: uppercase; letter-spacing: 1.2px;
+}
+.budget-total .bt-amt {
+  font-family: 'Pacifico', cursive; font-size: 38px;
+  background: linear-gradient(45deg, #7A5C38, #A07850);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin: 6px 0;
+}
+.budget-total .bt-sub { font-size: 12.5px; color: #8A7A6A; font-weight: 500; }
+.budget-row {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  border-radius: 16px;
+  padding: 14px 16px; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 14px;
+  border: 1px solid rgba(200,185,168,0.32);
+  box-shadow: 0 3px 12px rgba(120,100,80,0.07);
+  transition: all 0.25s ease;
+}
+.budget-row:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.72);
+  box-shadow: 0 7px 22px rgba(120,100,80,0.10);
+}
+.br-icon { font-size: 22px; width: 40px; text-align: center; flex-shrink: 0; }
+.br-info { flex: 1; }
+.br-info h4 { font-size: 13.5px; font-weight: 700; color: #3A2E24; margin-bottom: 2px; }
+.br-info p { font-size: 11.5px; color: #8A7A6A; font-weight: 400; }
+.br-amt { text-align: right; }
+.br-myr { font-size: 15px; font-weight: 700; color: #5E4E3E; }
+.br-inr { font-size: 11.5px; color: #9A8878; font-weight: 500; }
+.br-bar-wrap {
+  height: 4px; background: rgba(190,175,155,0.2); border-radius: 3px; margin-top: 7px;
+}
+.br-bar { height: 4px; border-radius: 3px; opacity: 0.75; }
+
+/* STAY CARDS */
+.stay-card {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(200,185,168,0.38);
+  border-radius: 24px;
+  padding: 0;
+  margin-bottom: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 28px rgba(120,100,80,0.09);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stay-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(120,100,80,0.13);
+}
+.stay-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid rgba(190,175,155,0.2);
+}
+.stay-icon {
+  width: 52px; height: 52px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+}
+.stay-icon-kl   { background: linear-gradient(135deg, #EDE0D0, #D8C8B2); }
+.stay-icon-lang { background: linear-gradient(135deg, #D0E8DF, #B8D4C8); }
+.stay-title-wrap { flex: 1; }
+.stay-title { font-size: 16px; font-weight: 800; color: #3A2E24; margin-bottom: 3px; }
+.stay-dates {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(139,111,71,0.1); border: 1px solid rgba(139,111,71,0.2);
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 11.5px; font-weight: 700; color: #7A5C38; letter-spacing: 0.3px;
+}
+.stay-body { padding: 18px 22px 20px; display: flex; flex-direction: column; gap: 12px; }
+.stay-row { display: flex; gap: 10px; align-items: flex-start; }
+.stay-row-icon { font-size: 15px; margin-top: 1px; flex-shrink: 0; }
+.stay-row-text { font-size: 13px; color: #5A4A3A; line-height: 1.55; }
+.stay-row-text strong { color: #3A2E24; font-weight: 700; display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+.stay-actions { display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
+.stay-map-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 10px 18px; border-radius: 14px;
+  background: linear-gradient(135deg, #8B6F47, #A07850);
+  color: #FAF8F4; font-size: 13px; font-weight: 800;
+  text-decoration: none; letter-spacing: 0.2px;
+  box-shadow: 0 4px 14px rgba(139,111,71,0.25);
+  transition: all 0.25s ease;
+}
+.stay-map-btn:hover {
+  background: linear-gradient(135deg, #7A5C38, #8B6F47);
+  box-shadow: 0 6px 20px rgba(139,111,71,0.35);
+  transform: translateY(-1px);
+}
+.stay-map-btn svg { flex-shrink: 0; }
+.stay-nights-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 16px; border-radius: 14px;
+  background: rgba(255,255,255,0.7);
+  border: 1.5px solid rgba(190,175,155,0.35);
+  color: #6B5A48; font-size: 13px; font-weight: 700;
+}
+.stay-divider { width: 100%; height: 1px; background: rgba(190,175,155,0.2); margin: 2px 0; }
+
+/* RESPONSIVE */
+@media (max-width: 400px) {
+  .header .trip-title { font-size: 28px; }
+  .header { padding: 24px 16px 16px; }
+  .palm-tree { display: none; } /* Hide palm trees on small screens */
+  .weather-grid { grid-template-columns: 1fr; }
+  .stat-pill { padding: 8px 14px; }
+  .nav-tab { padding: 8px 16px; font-size: 13px; }
+  .day-card { margin-bottom: 12px; }
+  .flight-card { padding: 16px; }
+  .budget-total { padding: 16px 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-decor">
+  <div class="bubble" style="width:200px;height:200px;top:-50px;left:-80px;animation-delay:0s;"></div>
+  <div class="bubble" style="width:120px;height:120px;top:40%;right:-40px;animation-delay:3s;"></div>
+  <div class="bubble" style="width:80px;height:80px;bottom:20%;left:10%;animation-delay:6s;"></div>
+  <div class="bubble" style="width:160px;height:160px;bottom:-60px;right:20%;animation-delay:2s;"></div>
+  <!-- Palm Trees -->
+  <div class="palm-tree left">🌴</div>
+  <div class="palm-tree right">🌴</div>
+</div>
+
+<div class="header">
+  <div class="trip-title">🌴 Malaysia Bound! 🌺</div>
+  <div class="trip-sub">17 Jun – 25 Jun 2025</div>
+  <div class="couple-badge">💑 Couple's Adventure &nbsp;•&nbsp; KL + Langkawi</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-pill" style="animation-delay:0.1s"><span class="sv">9</span><span class="sl">Days</span></div>
+  <div class="stat-pill" style="animation-delay:0.2s"><span class="sv">2</span><span class="sl">Destinations</span></div>
+  <div class="stat-pill" style="animation-delay:0.3s"><span class="sv">4</span><span class="sl">Flights</span></div>
+  <div class="stat-pill" style="animation-delay:0.4s"><span class="sv">3</span><span class="sl">Day Trips</span></div>
+  <div class="stat-pill" style="animation-delay:0.5s"><span class="sv">∞</span><span class="sl">Memories</span></div>
+</div>
+
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab('itinerary')">🗺️ Itinerary</button>
+  <button class="nav-tab" onclick="showTab('flights')">✈️ Flights</button>
+  <button class="nav-tab" onclick="showTab('weather')">🌤️ Weather</button>
+  <button class="nav-tab" onclick="showTab('packing')">🧳 Packing</button>
+  <button class="nav-tab" onclick="showTab('budget')">💰 Budget</button>
+  <button class="nav-tab" onclick="showTab('stays')">🏠 Stays</button>
+  <button class="nav-tab" onclick="showTab('tips')">💡 Tips</button>
+</div>
+
+<div class="content">
+
+<!-- ======== ITINERARY TAB ======== -->
+<div id="tab-itinerary" class="tab-pane active">
+
+  <div class="day-section-label">🛫 Getting There</div>
+
+  <!-- DAY 0 -->
+  <div class="day-card" id="card-0">
+    <div class="day-header" onclick="toggleCard('card-0')">
+      <div class="day-circle" style="background:linear-gradient(135deg,#9A90B2,#B0A2C2);color:rgba(255,255,255,0.95);">
+        <span class="dc-num">16</span><span class="dc-label">Jun</span>
+      </div>
+      <div class="day-info">
+        <h3>Mumbai → Singapore ✈</h3>
+        <div class="day-date">Sunday, 16 June 2025</div>
+        <div class="day-location" style="color:#764ba2;">🛫 Depart 23:40 · Transit Singapore</div>
+      </div>
+      <div class="day-toggle">⌄</div>
+    </div>
+    <div class="day-body">
+      <div class="event-item">
+        <div class="event-icon" style="background:#F0EBFF;">🌙</div>
+        <div class="event-content">
+          <div class="event-time">23:40 PM</div>
+          <div class="event-title">Fly Mumbai → Singapore</div>
+          <div class="event-desc">Night flight — try to sleep on the plane! Transit in Singapore, no stay planned. Keep travel documents handy for connecting flight.</div>
+          <div class="event-tags">
+            <span class="etag" style="background:#F0EBFF;color:#764ba2;">✈ Flight</span>
+            <span class="etag" style="background:#FFF3CD;color:#856404;">🌙 Overnight</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="day-card" id="card-1">
+    <div class="day-header" onclick="toggleCard('card-1')">
+      <div class="day-circle" style="background:linear-gradient(135deg,#7A9E96,#8AAAB8);color:rgba(255,255,255,0.95);">
+        <span class="dc-num">1</span><span class="dc-label">Day</span>
+      </div>
+      <div class="day-info">
+        <h3>Arrive Kuala Lumpur 🇲🇾</h3>
+        <div class="day-date">Tuesday, 17 June 2025</div>
+        <div class="day-location" style="color:#7A8A98;">📍 Kuala Lumpur · KLCC area</div>
+      </div>
+      <div class="day-toggle">⌄</div>
+    </div>
+    <div class="day-body">
+      <div class="event-item">
+        <div class="event-icon" style="background:#E8F5E9;">🌿</div>
+        <div class="event-content">
+          <div class="event-time">Morning · Changi Airport</div>
+          <div class="event-title">Jewel Changi — RAIN Vortex 💧</div>
+          <div class="event-desc">The world's tallest indoor waterfall (40m!) is free to view from the forest valley floors. Grab breakfast at one of the cafes overlooking the cascading water — absolutely surreal after a red-eye flight. Connected to T1/T2/T3 so no need to clear immigration!</div>
+          <div class="event-tags"><span class="etag" style="background:#E8F5E9;color:#2D6A4F;">🌿 Must-See</span><span class="etag" style="background:#E3F2FD;color:#1565C0;">🆓 Free</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF8E1;">🌳</div>
+        <div class="event-content">
+          <div class="event-time">Morning · Jewel Level 5</div>
+          <div class="event-title">Shiseido Forest Valley & Canopy Park</div>
+          <div class="event-desc">Walk through the lush indoor garden terraces — free and beautiful. If you have energy, Canopy Park (SGD 18–24pp) has sky nets, slides, and mazes above the forest. The hedge maze alone is worth it. Book online to skip queues.</div>
+          <div class="event-tags"><span class="etag" style="background:#FFF8E1;color:#F57F17;">🎡 Activity</span><span class="etag" style="background:#FCE4EC;color:#880E4F;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF3E0;">🍜</div>
+        <div class="event-content">
+          <div class="event-time">Late Morning · Jewel B2</div>
+          <div class="event-title">Hawker-style food at Jewel</div>
+          <div class="event-desc">Head to the basement food court for proper Singaporean bites — laksa, chicken rice, kaya toast, or a Bengawan Solo pandan cake to carry on. Way better than airport food. Grab a coffee at % Arabica if you need the caffeine hit after the overnight flight!</div>
+          <div class="event-tags"><span class="etag" style="background:#FFF3E0;color:#E65100;">🍴 Food</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#F3E5F5;">🛍️</div>
+        <div class="event-content">
+          <div class="event-time">12:00 · Head to Gate</div>
+          <div class="event-title">Quick browse + head to departure gate</div>
+          <div class="event-desc">Jewel has great duty-free and brand stores — perfect for last-minute picks (Lush, Charles & Keith, etc.). Leave Jewel by 12:00 to clear security and reach your gate with time to spare for the 14:30 SIN → KUL flight.</div>
+          <div class="event-tags"><span class="etag" style="background:#F3E5F5;color:#6A1B9A;">🛍️ Shopping</span><span class="etag" style="background:#E0F4FF;color:#118AB2;">✈ Next Flight</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E0F4FF;">✈️</div>
+        <div class="event-content">
+          <div class="event-time">14:30 → 15:45</div>
+          <div class="event-title">Singapore → KL (Land 15:45)</div>
+          <div class="event-desc">Clear immigration ~45–60 min. KLIA Ekspres to KL Sentral (28 min, MYR 55pp). Check into The Colony Infinitum on Jalan Dewan Sultan Sulaiman — ask them to hold your bags again on 22 Jun when you return from Langkawi!</div>
+          <div class="event-tags"><span class="etag" style="background:#E0F4FF;color:#118AB2;">✈ Flight</span><span class="etag" style="background:#E8FFF6;color:#2D6A4F;">🏨 Check-in</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF3CD;">🌆</div>
+        <div class="event-content">
+          <div class="event-time">Evening</div>
+          <div class="event-title">KLCC Park & Twin Towers</div>
+          <div class="event-desc">Stroll Suria KLCC at dusk. Free fountain light show at 8:30 PM — romantic and unmissable!</div>
+          <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FAEEDA;">🍜</div>
+        <div class="event-content">
+          <div class="event-time">Dinner</div>
+          <div class="event-title">Jalan Alor Night Market</div>
+          <div class="event-desc">Satay, char kway teow, fresh coconut — first taste of Malaysian street food magic!</div>
+          <div class="event-tags"><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" id="card-2">
+    <div class="day-header" onclick="toggleCard('card-2')">
+      <div class="day-circle" style="background:linear-gradient(135deg,#C0A870,#C09080);color:rgba(255,255,255,0.95);">
+        <span class="dc-num">2</span><span class="dc-label">Day</span>
+      </div>
+      <div class="day-info">
+        <h3>KL City Explorer 🏙️</h3>
+        <div class="day-date">Wednesday, 18 June 2025</div>
+        <div class="day-location" style="color:#A88078;">📍 Kuala Lumpur · Batu Caves → Sky Bar</div>
+      </div>
+      <div class="day-toggle">⌄</div>
+    </div>
+    <div class="day-body">
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF0F0;">🪨</div>
+        <div class="event-content">
+          <div class="event-time">Early morning</div>
+          <div class="event-title">Batu Caves — 272 Rainbow Steps</div>
+          <div class="event-desc">Iconic Hindu temple cave. Go before 9 AM to beat the heat and crowds. Colourful steps, massive golden statue!</div>
+          <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF0F5;">🏯</div>
+        <div class="event-content">
+          <div class="event-time">Mid-morning</div>
+          <div class="event-title">Thean Hou Temple</div>
+          <div class="event-desc">One of the largest and most ornate Chinese temples in Southeast Asia — six tiers of red lanterns, intricate carvings, and panoramic views over KL. Peaceful in the morning before the crowds arrive. Great couple photos! Free entry.</div>
+          <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span><span class="etag" style="background:#E3F2FD;color:#1565C0;">🆓 Free</span><span class="etag" style="background:#FCE4EC;color:#880E4F;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF3CD;">🏮</div>
+        <div class="event-content">
+          <div class="event-time">Late morning</div>
+          <div class="event-title">Petaling Street — Chinatown</div>
+          <div class="event-desc">Colourful market, kopitiam breakfast, kaya toast & soft-boiled eggs. Great for souvenirs!</div>
+          <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E0F4FF;">🏛️</div>
+        <div class="event-content">
+          <div class="event-time">Afternoon</div>
+          <div class="event-title">Merdeka Square & KL City Gallery</div>
+          <div class="event-desc">Colonial architecture, giant flagpole, brilliant 3D KL model inside. History of this incredible city!</div>
+          <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFE8E8;">🍹</div>
+        <div class="event-content">
+          <div class="event-time">Sunset</div>
+          <div class="event-title">Sky Bar, Traders Hotel — infinity pool sundowner</div>
+          <div class="event-desc">Overlooks Petronas Towers at golden hour. KL's most romantic rooftop. Book a table in advance!</div>
+          <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FAEEDA;">🍢</div>
+        <div class="event-content">
+          <div class="event-time">Dinner</div>
+          <div class="event-title">Bukit Bintang — Lot 10 Hutong</div>
+          <div class="event-desc">Award-winning hawker classics in AC comfort. The best of Malaysian cuisine in one spot.</div>
+          <div class="event-tags"><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" id="card-3">
+    <div class="day-header" onclick="toggleCard('card-3')">
+      <div class="day-circle" style="background:linear-gradient(135deg,#8AAAB8,#7A9E96);color:rgba(255,255,255,0.95);">
+        <span class="dc-num">3</span><span class="dc-label">Day</span>
+      </div>
+      <div class="day-info">
+        <h3>KL → Fly to Langkawi 🏝️</h3>
+        <div class="day-date">Thursday, 19 June 2025</div>
+        <div class="day-location" style="color:#7A9A90;">📍 KL morning → ✈ Langkawi 15:50</div>
+      </div>
+      <div class="day-toggle">⌄</div>
+    </div>
+    <div class="day-body">
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFE8E8;">🗼</div>
+        <div class="event-content">
+          <div class="event-time">Morning</div>
+          <div class="event-title">KL Tower Sky Deck</div>
+          <div class="event-desc">360° panoramic views of KL before you fly out — perfect couple's photos with Petronas Towers in the background.</div>
+          <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF3CD;">🍛</div>
+        <div class="event-content">
+          <div class="event-time">12:30 PM</div>
+          <div class="event-title">Lunch & check out — The Colony Infinitum</div>
+          <div class="event-desc">Check out of The Colony Infinitum (Jalan Dewan Sultan Sulaiman). Ask them to store your luggage — you'll pick it up when you return on 22 Jun. Head to KLIA by 1:30 PM via KLIA Ekspres.</div>
+          <div class="event-tags"><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E0F4FF;">✈️</div>
+        <div class="event-content">
+          <div class="event-time">15:50 → ~17:00</div>
+          <div class="event-title">Fly KL → Langkawi</div>
+          <div class="event-desc">~1 hr flight. Arrive Langkawi ~5 PM. Grab to your stay at Jalan Teluk Baru Pantai Tengah, Mukim Kedawang, 07100 Pantai Cenang. Welcome to paradise! 🌺</div>
+          <div class="event-tags"><span class="etag" style="background:#E0F4FF;color:#118AB2;">✈ Flight</span><span class="etag" style="background:#E8FFF6;color:#2D6A4F;">🏨 Check-in</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E8FFF6;">🌅</div>
+        <div class="event-content">
+          <div class="event-time">Evening</div>
+          <div class="event-title">Eagle Square sunset + seafood dinner</div>
+          <div class="event-desc">Dataran Lang (giant eagle statue) at the waterfront for sunset. Then Pantai Cenang for grilled tiger prawns by the sea. Duty-free drinks! 🦞</div>
+          <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-section-label">🏝️ Island Paradise — Langkawi</div>
+
+  <!-- DAY 4 -->
+  <div class="day-card" id="card-4">
+    <div class="day-header" onclick="toggleCard('card-4')">
+      <div class="day-circle" style="background:linear-gradient(135deg,#C0A060,#C8B870);color:rgba(255,255,255,0.95);">
+        <span class="dc-num">4</span><span class="dc-label">Day</span>
+      </div>
+      <div class="day-info">
+        <h3>Langkawi — Beach & Sky Cab 🚡</h3>
+        <div class="day-date">Friday, 20 June 2025</div>
+        <div class="day-location" style="color:#A09060;">📍 Langkawi · Cenang Beach → Sky Cab → Sunset Cruise</div>
+      </div>
+      <div class="day-toggle">⌄</div>
+    </div>
+    <div class="day-body">
+      <div class="event-item">
+        <div class="event-icon" style="background:#E0F4FF;">🏖️</div>
+        <div class="event-content">
+          <div class="event-time">Morning</div>
+          <div class="event-title">Pantai Cenang Beach</div>
+          <div class="event-desc">White sand, turquoise Andaman Sea water. Swim, sunbathe, jet ski. Duty-free beach bars — bliss!</div>
+          <div class="event-tags"><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E8FFF6;">🚡</div>
+        <div class="event-content">
+          <div class="event-time">Afternoon</div>
+          <div class="event-title">Langkawi Sky Cab & SkyBridge</div>
+          <div class="event-desc">One of the world's steepest cable cars! Jaw-dropping views over jungle canopy & Andaman Sea. Curved SkyBridge at the top is iconic. Book online (~MYR 55pp).</div>
+          <div class="event-tags"><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFE8E8;">🛥️</div>
+        <div class="event-content">
+          <div class="event-time">Sunset</div>
+          <div class="event-title">Island-hopping Sunset Cruise 🌅</div>
+          <div class="event-desc">1.5 hr cruise around Langkawi's islands at golden hour. THE most romantic experience in Malaysia. Book ahead (~MYR 80pp).</div>
+          <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FAEEDA;">🦞</div>
+        <div class="event-content">
+          <div class="event-time">Dinner</div>
+          <div class="event-title">The Cliff Restaurant — romantic hilltop dinner</div>
+          <div class="event-desc">Elevated hilltop restaurant with sweeping sea views. Special couple's dinner — book in advance!</div>
+          <div class="event-tags"><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card" id="card-5">
+    <div class="day-header" onclick="toggleCard('card-5')">
+      <div class="day-circle" style="background:linear-gradient(135deg,#7A9E8A,#6A8870);color:rgba(255,255,255,0.95);">
+        <span class="dc-num">5</span><span class="dc-label">Day</span>
+      </div>
+      <div class="day-info">
+        <h3>Mangroves & Duty-Free 🛶</h3>
+        <div class="day-date">Saturday, 21 June 2025</div>
+        <div class="day-location" style="color:#2D6A4F;">📍 Langkawi · Geoforest → Pregnant Maiden Lake → Shopping</div>
+      </div>
+      <div class="day-toggle">⌄</div>
+    </div>
+    <div class="day-body">
+      <div class="event-item">
+        <div class="event-icon" style="background:#E8FFF6;">🦅</div>
+        <div class="event-content">
+          <div class="event-time">Morning</div>
+          <div class="event-title">Kilim Karst Geoforest — Mangrove Boat Tour</div>
+          <div class="event-desc">UNESCO Geopark — eagles, monitor lizards, monkeys through ancient mangroves. Magical half-day boat tour (~MYR 100pp).</div>
+          <div class="event-tags"><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E0F4FF;">🏊</div>
+        <div class="event-content">
+          <div class="event-time">Late morning</div>
+          <div class="event-title">Pulau Dayang Bunting — Pregnant Maiden Lake</div>
+          <div class="event-desc">Freshwater lake inside a jungle island — swim surrounded by limestone cliffs. Serene and beautiful.</div>
+          <div class="event-tags"><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF3CD;">🛍️</div>
+        <div class="event-content">
+          <div class="event-time">Afternoon</div>
+          <div class="event-title">Duty-Free Shopping Spree!</div>
+          <div class="event-desc">Chocolates (Cadbury, Toblerone), perfumes, alcohol at rock-bottom prices. Cenang Mall & Kuah town. Last chance before flying back!</div>
+          <div class="event-tags"><span class="etag" style="background:#FFF3CD;color:#856404;">🛍️ Shopping</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FAEEDA;">🌙</div>
+        <div class="event-content">
+          <div class="event-time">Evening</div>
+          <div class="event-title">Lazy beach dinner & pack up</div>
+          <div class="event-desc">Final Langkawi evening — beachside café, toes in the sand. Check out by 9:30 AM tomorrow — flight home to KL at 11:15!</div>
+          <div class="event-tags"><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-section-label">🏙️ KL — Day Trips & Grand Finale</div>
+
+  <!-- DAY 6 -->
+  <div class="day-card" id="card-6">
+    <div class="day-header" onclick="toggleCard('card-6')">
+      <div class="day-circle" style="background:linear-gradient(135deg,#C09080,#C0A868);color:rgba(255,255,255,0.95);">
+        <span class="dc-num">6</span><span class="dc-label">Day</span>
+      </div>
+      <div class="day-info">
+        <h3>Fly back KL + Putrajaya 🕌</h3>
+        <div class="day-date">Sunday, 22 June 2025</div>
+        <div class="day-location" style="color:#A88078;">📍 Land KL 12:30 PM → Putrajaya → Revolving Dinner</div>
+      </div>
+      <div class="day-toggle">⌄</div>
+    </div>
+    <div class="day-body">
+      <div class="event-item">
+        <div class="event-icon" style="background:#E0F4FF;">✈️</div>
+        <div class="event-content">
+          <div class="event-time">11:15 → 12:30 PM</div>
+          <div class="event-title">Checkout & Fly Langkawi → KL · Land 12:30 PM</div>
+          <div class="event-desc">Check out of Jalan Teluk Baru Pantai Tengah, Mukim Kedawang, Pantai Cenang by 10 AM. Grab to airport for 11:15 flight. KLIA Ekspres to KL Sentral. Pick up stored bags from The Colony Infinitum. Freshen up — ready by 2:30 PM!</div>
+          <div class="event-tags"><span class="etag" style="background:#E0F4FF;color:#118AB2;">✈ Flight</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E8FFF6;">🕌</div>
+        <div class="event-content">
+          <div class="event-time">Afternoon</div>
+          <div class="event-title">Putrajaya — Malaysia's Futuristic Capital</div>
+          <div class="event-desc">Pink Putra Mosque on the lake, grand Perdana Putra palace, iconic Seri Wawasan Bridge. 25 min from KL — unlike anything else in Malaysia!</div>
+          <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFE8E8;">⛵</div>
+        <div class="event-content">
+          <div class="event-time">Sunset</div>
+          <div class="event-title">Putrajaya Lake Cruise</div>
+          <div class="event-desc">Scenic boat cruise past the mosque and government palaces at golden hour. Only ~MYR 10pp — incredible value!</div>
+          <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FAEEDA;">🌃</div>
+        <div class="event-content">
+          <div class="event-time">Dinner</div>
+          <div class="event-title">Atmosphere 360 — Revolving Rooftop Dinner 🗼</div>
+          <div class="event-desc">KL Tower's revolving restaurant — city lights rotating slowly below. THE most romantic dinner in KL. Book window seats in advance!</div>
+          <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day-card" id="card-7">
+    <div class="day-header" onclick="toggleCard('card-7')">
+      <div class="day-circle" style="background:linear-gradient(135deg,#A898B8,#9A90B2);color:rgba(255,255,255,0.95);">
+        <span class="dc-num">7</span><span class="dc-label">Day</span>
+      </div>
+      <div class="day-info">
+        <h3>Day Trip — Malacca 🏰</h3>
+        <div class="day-date">Monday, 23 June 2025</div>
+        <div class="day-location" style="color:#764ba2;">📍 KL → Malacca (2 hrs) → KL</div>
+      </div>
+      <div class="day-toggle">⌄</div>
+    </div>
+    <div class="day-body">
+      <div class="event-item">
+        <div class="event-icon" style="background:#F0EBFF;">🚌</div>
+        <div class="event-content">
+          <div class="event-time">7:30 AM</div>
+          <div class="event-title">Bus TBS → Malacca (~2 hrs, MYR 20pp)</div>
+          <div class="event-desc">Frequent buses from Terminal Bersepadu Selatan. Arrive 9:30 AM — Grab to heritage zone.</div>
+          <div class="event-tags"><span class="etag" style="background:#F1EFE8;color:#5F5E5A;">🚌 Transport</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E6F1FB;">🏰</div>
+        <div class="event-content">
+          <div class="event-time">Morning</div>
+          <div class="event-title">Dutch Square, A Famosa & St Paul's Hill</div>
+          <div class="event-desc">500-year-old Portuguese fort ruins, red colonial buildings, hilltop church with sweeping views. Compact and walkable UNESCO heritage zone.</div>
+          <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FAEEDA;">🍚</div>
+        <div class="event-content">
+          <div class="event-time">Lunch</div>
+          <div class="event-title">Chicken Rice Balls — Low Yong Mow</div>
+          <div class="event-desc">Malacca's most iconic dish! Glutinous rice balls with Hainanese chicken. Queue expected — totally worth it.</div>
+          <div class="event-tags"><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E8FFF6;">🛶</div>
+        <div class="event-content">
+          <div class="event-time">Afternoon</div>
+          <div class="event-title">Jonker Walk & Malacca River Cruise</div>
+          <div class="event-desc">Antiques, street food, and a romantic river cruise past colourful murals and heritage shophouses.</div>
+          <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E0F4FF;">🚌</div>
+        <div class="event-content">
+          <div class="event-time">Evening</div>
+          <div class="event-title">Bus back to KL (~2 hrs)</div>
+          <div class="event-desc">Buses run till 10 PM. Back in KL by 8–9 PM. Easy dinner near your hotel.</div>
+          <div class="event-tags"><span class="etag" style="background:#F1EFE8;color:#5F5E5A;">🚌 Transport</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div class="day-card" id="card-8">
+    <div class="day-header" onclick="toggleCard('card-8')">
+      <div class="day-circle" style="background:linear-gradient(135deg,#C09088,#A898B8);color:rgba(255,255,255,0.95);">
+        <span class="dc-num">8</span><span class="dc-label">Day</span>
+      </div>
+      <div class="day-info">
+        <h3>Day Trip — Genting Highlands 🎢</h3>
+        <div class="day-date">Tuesday, 24 June 2025</div>
+        <div class="day-location" style="color:#A88078;">📍 KL → Genting (~1 hr) → KL</div>
+      </div>
+      <div class="day-toggle">⌄</div>
+    </div>
+    <div class="day-body">
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF0F0;">🚠</div>
+        <div class="event-content">
+          <div class="event-time">Morning</div>
+          <div class="event-title">Bus + Skyway Cable Car to Genting</div>
+          <div class="event-desc">Bus from Pudu Raya (~MYR 10pp, 1 hr), then Skyway cable car up the mountain. Arrives at ~2,000m — pleasantly cool at 20°C!</div>
+          <div class="event-tags"><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFE8E8;">🎢</div>
+        <div class="event-content">
+          <div class="event-time">Full day</div>
+          <div class="event-title">Genting SkyWorlds Theme Park 🎉</div>
+          <div class="event-desc">Malaysia's best theme park — Ice Age, Rio, Kung Fu Panda zones! Full day of rides and fun. Book tickets online in advance (~MYR 180–200pp). BRING A JACKET!</div>
+          <div class="event-tags"><span class="etag" style="background:#FAECE7;color:#993C1D;">🎢 Fun</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF3CD;">🎰</div>
+        <div class="event-content">
+          <div class="event-time">Evening</div>
+          <div class="event-title">Casino & Snow World (optional)</div>
+          <div class="event-desc">Resorts World Casino — bring your passport. Indoor Snow World ~MYR 40pp. Last bus back to KL ~11 PM.</div>
+          <div class="event-tags"><span class="etag" style="background:#FAECE7;color:#993C1D;">🎢 Fun</span><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 9 -->
+  <div class="day-card" id="card-9">
+    <div class="day-header" onclick="toggleCard('card-9')">
+      <div class="day-circle" style="background:linear-gradient(135deg,#9A90B2,#C09088);color:rgba(255,255,255,0.95);">
+        <span class="dc-num">9</span><span class="dc-label">Day</span>
+      </div>
+      <div class="day-info">
+        <h3>Final Morning → Fly Home ✈️</h3>
+        <div class="day-date">Wednesday, 25 June 2025</div>
+        <div class="day-location" style="color:#8A80A0;">📍 KL · Shopping · Depart 22:00 KL → Singapore</div>
+      </div>
+      <div class="day-toggle">⌄</div>
+    </div>
+    <div class="day-body">
+      <div class="event-item">
+        <div class="event-icon" style="background:#FFF3CD;">🛍️</div>
+        <div class="event-content">
+          <div class="event-time">Morning</div>
+          <div class="event-title">Sunway Lagoon OR last-minute shopping</div>
+          <div class="event-desc">Late flight (22:00) so you have the full day! Sunway Lagoon (~MYR 180pp) for a fun final day, or KLCC / Central Market for batik, Beryl's chocolates, pewter, and Twin Towers souvenirs.</div>
+          <div class="event-tags"><span class="etag" style="background:#FAECE7;color:#993C1D;">🎢 Fun</span><span class="etag" style="background:#FFF3CD;color:#856404;">🛍️ Shopping</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#FAEEDA;">🍽️</div>
+        <div class="event-content">
+          <div class="event-time">Afternoon / Evening</div>
+          <div class="event-title">Farewell KL dinner</div>
+          <div class="event-desc">One last Malaysian meal — Jalan Alor or Bukit Bintang. Savour every bite before heading to the airport!</div>
+          <div class="event-tags"><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon" style="background:#E0F4FF;">✈️</div>
+        <div class="event-content">
+          <div class="event-time">19:00 — head to KLIA</div>
+          <div class="event-title">KLIA Ekspres → Fly KL → Singapore 22:00</div>
+          <div class="event-desc">Leave hotel by 7 PM. KLIA Ekspres (28 min). Check in — KL → Singapore 22:00, Singapore → Mumbai 07:50 on 26 Jun arriving 10:30. Welcome home! 🏠</div>
+          <div class="event-tags"><span class="etag" style="background:#E0F4FF;color:#118AB2;">✈ Flight</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======== FLIGHTS TAB ======== -->
+<div id="tab-flights" class="tab-pane">
+
+  <div class="day-section-label">🛫 Outbound Journey</div>
+
+  <div class="flight-card">
+    <div class="flight-route">
+      <div><div class="flight-city">BOM</div><div class="flight-code">Mumbai</div></div>
+      <div class="flight-arrow">
+        <div class="flight-line"></div>
+        <div class="flight-duration">Night flight</div>
+      </div>
+      <div style="text-align:right"><div class="flight-city">SIN</div><div class="flight-code">Singapore</div></div>
+    </div>
+    <div class="flight-meta">
+      <div class="fm"><div class="fm-label">Date</div><div class="fm-val">16 Jun (Sun)</div></div>
+      <div class="fm"><div class="fm-label">Departs</div><div class="fm-val">23:40</div></div>
+    </div>
+    <div class="transit-badge">🔄 Transit — no Singapore stay</div>
+  </div>
+
+  <div class="flight-card">
+    <div class="flight-route">
+      <div><div class="flight-city">SIN</div><div class="flight-code">Singapore</div></div>
+      <div class="flight-arrow">
+        <div class="flight-line"></div>
+        <div class="flight-duration">~1h 15m</div>
+      </div>
+      <div style="text-align:right"><div class="flight-city">KUL</div><div class="flight-code">Kuala Lumpur</div></div>
+    </div>
+    <div class="flight-meta">
+      <div class="fm"><div class="fm-label">Date</div><div class="fm-val">17 Jun (Tue)</div></div>
+      <div class="fm"><div class="fm-label">Departs</div><div class="fm-val">14:30</div></div>
+      <div class="fm"><div class="fm-label">Arrives</div><div class="fm-val">15:45 ✅</div></div>
+    </div>
+  </div>
+
+  <div class="day-section-label">🏝️ KL ↔ Langkawi</div>
+
+  <div class="flight-card">
+    <div class="flight-route">
+      <div><div class="flight-city">KUL</div><div class="flight-code">Kuala Lumpur</div></div>
+      <div class="flight-arrow">
+        <div class="flight-line"></div>
+        <div class="flight-duration">~1h</div>
+      </div>
+      <div style="text-align:right"><div class="flight-city">LGK</div><div class="flight-code">Langkawi</div></div>
+    </div>
+    <div class="flight-meta">
+      <div class="fm"><div class="fm-label">Date</div><div class="fm-val">19 Jun (Thu)</div></div>
+      <div class="fm"><div class="fm-label">Departs</div><div class="fm-val">15:50</div></div>
+      <div class="fm"><div class="fm-label">Arrive at KLIA</div><div class="fm-val">1:30 PM ⏰</div></div>
+    </div>
+    <div class="transit-badge">⏰ Leave hotel by 1:30 PM for KLIA</div>
+  </div>
+
+  <div class="flight-card">
+    <div class="flight-route">
+      <div><div class="flight-city">LGK</div><div class="flight-code">Langkawi</div></div>
+      <div class="flight-arrow">
+        <div class="flight-line"></div>
+        <div class="flight-duration">~1h</div>
+      </div>
+      <div style="text-align:right"><div class="flight-city">KUL</div><div class="flight-code">Kuala Lumpur</div></div>
+    </div>
+    <div class="flight-meta">
+      <div class="fm"><div class="fm-label">Date</div><div class="fm-val">22 Jun (Sun)</div></div>
+      <div class="fm"><div class="fm-label">Departs</div><div class="fm-val">11:15</div></div>
+      <div class="fm"><div class="fm-label">Arrives</div><div class="fm-val">~12:30 PM ✅</div></div>
+    </div>
+    <div class="transit-badge">✅ Check out by 9:30 AM</div>
+  </div>
+
+  <div class="day-section-label">🛬 Return Journey</div>
+
+  <div class="flight-card">
+    <div class="flight-route">
+      <div><div class="flight-city">KUL</div><div class="flight-code">Kuala Lumpur</div></div>
+      <div class="flight-arrow">
+        <div class="flight-line"></div>
+        <div class="flight-duration">Night flight</div>
+      </div>
+      <div style="text-align:right"><div class="flight-city">SIN</div><div class="flight-code">Singapore</div></div>
+    </div>
+    <div class="flight-meta">
+      <div class="fm"><div class="fm-label">Date</div><div class="fm-val">25 Jun (Wed)</div></div>
+      <div class="fm"><div class="fm-label">Departs</div><div class="fm-val">22:00</div></div>
+      <div class="fm"><div class="fm-label">Leave hotel</div><div class="fm-val">7:00 PM</div></div>
+    </div>
+    <div class="transit-badge">🔄 Transit Singapore — no stay</div>
+  </div>
+
+  <div class="flight-card">
+    <div class="flight-route">
+      <div><div class="flight-city">SIN</div><div class="flight-code">Singapore</div></div>
+      <div class="flight-arrow">
+        <div class="flight-line"></div>
+        <div class="flight-duration">~5h 40m</div>
+      </div>
+      <div style="text-align:right"><div class="flight-city">BOM</div><div class="flight-code">Mumbai</div></div>
+    </div>
+    <div class="flight-meta">
+      <div class="fm"><div class="fm-label">Date</div><div class="fm-val">26 Jun (Thu)</div></div>
+      <div class="fm"><div class="fm-label">Departs</div><div class="fm-val">07:50</div></div>
+      <div class="fm"><div class="fm-label">Arrives</div><div class="fm-val">10:30 🏠</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======== WEATHER TAB ======== -->
+<div id="tab-weather" class="tab-pane">
+  <div class="day-section-label">☀️ June Weather Forecast</div>
+  <div class="weather-grid">
+    <div class="weather-card">
+      <div class="wc-icon">🏙️</div>
+      <div class="wc-place">Kuala Lumpur</div>
+      <div class="wc-temp">28–34°C</div>
+      <div class="wc-desc">Hot & humid</div>
+      <div class="wc-stat">🌧️ Afternoon showers</div>
+      <div class="wc-stat">☀️ UV: Extreme</div>
+    </div>
+    <div class="weather-card">
+      <div class="wc-icon">🏝️</div>
+      <div class="wc-place">Langkawi</div>
+      <div class="wc-temp">27–33°C</div>
+      <div class="wc-desc">Warm & tropical</div>
+      <div class="wc-stat">🌊 SW Monsoon</div>
+      <div class="wc-stat">☀️ UV: Very high</div>
+    </div>
+    <div class="weather-card">
+      <div class="wc-icon">🕌</div>
+      <div class="wc-place">Putrajaya</div>
+      <div class="wc-temp">27–33°C</div>
+      <div class="wc-desc">Similar to KL</div>
+      <div class="wc-stat">🌧️ Short showers</div>
+      <div class="wc-stat">💧 High humidity</div>
+    </div>
+    <div class="weather-card">
+      <div class="wc-icon">🎢</div>
+      <div class="wc-place">Genting</div>
+      <div class="wc-temp">15–22°C</div>
+      <div class="wc-desc">Cool & misty!</div>
+      <div class="wc-stat">🧥 Jacket needed</div>
+      <div class="wc-stat">🌫️ Often foggy</div>
+    </div>
+  </div>
+  <div class="tip-card" style="background:linear-gradient(135deg,rgba(255,217,61,0.15),rgba(255,107,107,0.1));">
+    <div class="tip-emoji">🌦️</div>
+    <div class="tip-text">
+      <h4>June = Southwest Monsoon Season</h4>
+      <p>Rain comes in short, heavy bursts (30–60 min) then clears fast. Plan outdoor activities for mornings. Langkawi's west coast (Cenang) can have choppier seas — the sunsets are still stunning!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======== PACKING TAB ======== -->
+<div id="tab-packing" class="tab-pane">
+  <div class="day-section-label">🧳 Packing Checklist</div>
+  <p style="color:rgba(255,255,255,0.85);font-size:12px;font-weight:700;margin-bottom:12px;">Tap items to check them off! ✅</p>
+
+  <div class="pack-section">
+    <h4>👕 Clothing</h4>
+    <div class="pack-grid">
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">👕</span><span class="pi-text">Light tees (×5)</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🩳</span><span class="pi-text">Shorts & chinos</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">👗</span><span class="pi-text">Dress / smart casuals</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🧥</span><span class="pi-text">Jacket (Genting!)</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">👙</span><span class="pi-text">Swimwear</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">👟</span><span class="pi-text">Walking shoes</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🩴</span><span class="pi-text">Flip flops</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🧣</span><span class="pi-text">Sarong / wrap</span><span class="pi-check">✓</span></div>
+    </div>
+  </div>
+
+  <div class="pack-section">
+    <h4>📋 Essentials</h4>
+    <div class="pack-grid">
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🛂</span><span class="pi-text">Passport (6m+ valid)</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">📄</span><span class="pi-text">Travel insurance</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">📱</span><span class="pi-text">Unlocked phone / SIM</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🔋</span><span class="pi-text">Power bank</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🔌</span><span class="pi-text">Universal adaptor</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">💵</span><span class="pi-text">MYR cash</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">📋</span><span class="pi-text">Doc copies</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🎫</span><span class="pi-text">All flight tickets</span><span class="pi-check">✓</span></div>
+    </div>
+  </div>
+
+  <div class="pack-section">
+    <h4>💊 Health & Sun</h4>
+    <div class="pack-grid">
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🧴</span><span class="pi-text">SPF 50+ sunscreen</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🦟</span><span class="pi-text">Insect repellent</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">💊</span><span class="pi-text">Stomach tablets</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🧃</span><span class="pi-text">Rehydration sachets</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">💧</span><span class="pi-text">Reusable water bottle</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🌂</span><span class="pi-text">Compact umbrella</span><span class="pi-check">✓</span></div>
+    </div>
+  </div>
+
+  <div class="pack-section">
+    <h4>📱 Apps to Download</h4>
+    <div class="pack-grid">
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🚗</span><span class="pi-text">Grab (taxi + food)</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">🗺️</span><span class="pi-text">Google Maps offline</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">💬</span><span class="pi-text">Google Translate</span><span class="pi-check">✓</span></div>
+      <div class="pack-item" onclick="togglePack(this)"><span class="pi-icon">💱</span><span class="pi-text">XE Currency</span><span class="pi-check">✓</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== BUDGET TAB ======== -->
+<div id="tab-budget" class="tab-pane">
+  <div class="budget-total">
+    <div class="bt-label">Estimated Total (2 people)</div>
+    <div class="bt-amt">MYR 6,356</div>
+    <div class="bt-sub">≈ ₹1,18,844 · including flights from India</div>
+  </div>
+
+  <div class="day-section-label">💸 Category Breakdown</div>
+
+  <div class="budget-row">
+    <div class="br-icon">✈️</div>
+    <div class="br-info">
+      <h4>International Flight</h4>
+      <p>Mumbai ↔ Singapore flights</p>
+      <div class="br-bar-wrap"><div class="br-bar" style="width:47%;background:#8FA8BA;opacity:0.8;"></div></div>
+    </div>
+    <div class="br-amt"><div class="br-myr">MYR 2,972</div><div class="br-inr">≈ ₹55,548</div></div>
+  </div>
+
+  <div class="budget-row">
+    <div class="br-icon">🛩️</div>
+    <div class="br-info">
+      <h4>Domestic Flight</h4>
+      <p>Singapore ↔ Kuala Lumpur</p>
+      <div class="br-bar-wrap"><div class="br-bar" style="width:16%;background:#8CABA0;opacity:0.8;"></div></div>
+    </div>
+    <div class="br-amt"><div class="br-myr">MYR 1,038</div><div class="br-inr">≈ ₹19,408</div></div>
+  </div>
+
+  <div class="budget-row">
+    <div class="br-icon">🏠</div>
+    <div class="br-info">
+      <h4>Airbnb 17th to 19th</h4>
+      <p>The Colony Infinitum, Kuala Lumpur</p>
+      <div class="br-bar-wrap"><div class="br-bar" style="width:7%;background:#BFA882;opacity:0.8;"></div></div>
+    </div>
+    <div class="br-amt"><div class="br-myr">MYR 425</div><div class="br-inr">≈ ₹7,941</div></div>
+  </div>
+
+  <div class="budget-row">
+    <div class="br-icon">🌴</div>
+    <div class="br-info">
+      <h4>Airbnb 19th to 22nd</h4>
+      <p>Pantai Cenang, Langkawi</p>
+      <div class="br-bar-wrap"><div class="br-bar" style="width:20%;background:#BFA882;opacity:0.8;"></div></div>
+    </div>
+    <div class="br-amt"><div class="br-myr">MYR 1,263</div><div class="br-inr">≈ ₹23,613</div></div>
+  </div>
+
+  <div class="budget-row">
+    <div class="br-icon">🏡</div>
+    <div class="br-info">
+      <h4>Airbnb 22nd to 25th</h4>
+      <p>Accommodation, Kuala Lumpur</p>
+      <div class="br-bar-wrap"><div class="br-bar" style="width:10%;background:#C0948A;opacity:0.8;"></div></div>
+    </div>
+    <div class="br-amt"><div class="br-myr">MYR 658</div><div class="br-inr">≈ ₹12,296</div></div>
+  </div>
+
+  <div style="background:rgba(255,255,255,0.50);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:14px;padding:14px 18px;margin-top:10px;border:1px solid rgba(200,185,168,0.32);box-shadow:0 3px 12px rgba(120,100,80,0.06);">
+    <p style="color:#6B5A48;font-size:12px;font-weight:500;line-height:1.9;">
+      💱 <strong style="color:#3A2E24;">1 MYR ≈ ₹18.7 INR</strong><br>
+      🛍️ Add MYR 600–900 buffer for shopping &amp; surprises<br>
+      🆓 Langkawi duty-free = great deals on chocolates, perfumes &amp; alcohol<br>
+      💡 Best exchange rates at Bukit Bintang money changers (not airport!)
+    </p>
+  </div>
+</div>
+
+<!-- ======== STAYS TAB ======== -->
+<div id="tab-stays" class="tab-pane">
+  <div class="day-section-label">🏠 Where We're Staying</div>
+
+  <!-- Stay 1: KL Colony Infinitum -->
+  <div class="stay-card">
+    <div class="stay-header">
+      <div class="stay-icon stay-icon-kl">🏙️</div>
+      <div class="stay-title-wrap">
+        <div class="stay-title">The Colony Infinitum</div>
+        <div class="stay-dates">📅 17 Jun → 19 Jun &nbsp;·&nbsp; 2 nights</div>
+      </div>
+    </div>
+    <div class="stay-body">
+      <div class="stay-row">
+        <div class="stay-row-icon">📍</div>
+        <div class="stay-row-text">
+          <strong>Address</strong>
+          Jalan Dewan Sultan Sulaiman, Kuala Lumpur, Federal Territory of Kuala Lumpur 50300
+        </div>
+      </div>
+      <div class="stay-divider"></div>
+      <div class="stay-row">
+        <div class="stay-row-icon">ℹ️</div>
+        <div class="stay-row-text">
+          <strong>Note</strong>
+          Ask the hotel to store your Langkawi luggage on 19 Jun — pick it up again when you return on 22 Jun!
+        </div>
+      </div>
+      <div class="stay-actions">
+        <a class="stay-map-btn" href="https://www.google.com/maps/search/The+Colony+Infinitum+Jalan+Dewan+Sultan+Sulaiman+Kuala+Lumpur+50300" target="_blank">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Open in Google Maps
+        </a>
+        <div class="stay-nights-badge">🌙 2 nights &nbsp;·&nbsp; ≈ ₹7,941</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stay 2: Langkawi Pantai Cenang -->
+  <div class="stay-card">
+    <div class="stay-header">
+      <div class="stay-icon stay-icon-lang">🌴</div>
+      <div class="stay-title-wrap">
+        <div class="stay-title">Pantai Cenang Airbnb</div>
+        <div class="stay-dates">📅 19 Jun → 22 Jun &nbsp;·&nbsp; 3 nights</div>
+      </div>
+    </div>
+    <div class="stay-body">
+      <div class="stay-row">
+        <div class="stay-row-icon">📍</div>
+        <div class="stay-row-text">
+          <strong>Address</strong>
+          Jalan Teluk Baru Pantai Tengah, Mukim Kedawang, 07100 Pantai Cenang, Malaysia
+        </div>
+      </div>
+      <div class="stay-divider"></div>
+      <div class="stay-row">
+        <div class="stay-row-icon">ℹ️</div>
+        <div class="stay-row-text">
+          <strong>Note</strong>
+          Right on the Pantai Tengah strip — steps from the beach, restaurants and duty-free shops. Check out by 10 AM on 22 Jun for the 11:15 flight back to KL.
+        </div>
+      </div>
+      <div class="stay-actions">
+        <a class="stay-map-btn" href="https://www.google.com/maps/search/Jalan+Teluk+Baru+Pantai+Tengah+Mukim+Kedawang+07100+Pantai+Cenang+Malaysia" target="_blank">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Open in Google Maps
+        </a>
+        <div class="stay-nights-badge">🌙 3 nights &nbsp;·&nbsp; ≈ ₹23,613</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stay 3: KL 22-25 -->
+  <div class="stay-card">
+    <div class="stay-header">
+      <div class="stay-icon stay-icon-kl">🏙️</div>
+      <div class="stay-title-wrap">
+        <div class="stay-title">KL Airbnb</div>
+        <div class="stay-dates">📅 22 Jun → 25 Jun &nbsp;·&nbsp; 3 nights</div>
+      </div>
+    </div>
+    <div class="stay-body">
+      <div class="stay-row">
+        <div class="stay-row-icon">📍</div>
+        <div class="stay-row-text">
+          <strong>Address</strong>
+          Kuala Lumpur, Malaysia — address to be added
+        </div>
+      </div>
+      <div class="stay-divider"></div>
+      <div class="stay-row">
+        <div class="stay-row-icon">ℹ️</div>
+        <div class="stay-row-text">
+          <strong>Note</strong>
+          Pick up stored luggage from The Colony Infinitum on arrival. Check out by 25 Jun evening — late flight KL → Singapore at 22:00.
+        </div>
+      </div>
+      <div class="stay-actions">
+        <div class="stay-nights-badge">🌙 3 nights &nbsp;·&nbsp; ≈ ₹12,296</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======== TIPS TAB ======== -->
+<div id="tab-tips" class="tab-pane">
+  <div class="day-section-label">💡 Essential Tips</div>
+
+  <div class="tip-card"><div class="tip-emoji">🚇</div><div class="tip-text"><h4>KLIA Ekspres — fastest way into KL</h4><p>28 min from KLIA to KL Sentral, MYR 55pp. Book online for convenience. Way faster than Grab from the airport.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">📱</div><div class="tip-text"><h4>Grab is your best friend</h4><p>Use Grab for all taxis in Malaysia — safer, metered, and much cheaper than street taxis. Download before you land!</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🏨</div><div class="tip-text"><h4>Same KL hotel for both stays</h4><p>Book the same KLCC hotel for 17–18 Jun AND 22–24 Jun. Ask them to store your Langkawi bags for free on 19 Jun — lifesaver!</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">⛽</div><div class="tip-text"><h4>Langkawi is duty-free!</h4><p>Alcohol, chocolates, perfumes are significantly cheaper. Stock up before flying back to KL — airport limits apply on the return.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🎢</div><div class="tip-text"><h4>Book Genting SkyWorlds online</h4><p>Tickets are cheaper online than at the gate. Also skips the queue. And seriously — bring a jacket. Genting is COLD!</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">💧</div><div class="tip-text"><h4>Only drink bottled water</h4><p>Tap water in Malaysia is technically treated but stick to bottled throughout. Buy big bottles from convenience stores — way cheaper than hotel mini-bars.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🌶️</div><div class="tip-text"><h4>Ask for "kurang pedas"</h4><p>Means "less spicy" in Malay — Malaysian spice levels can catch Indians off guard! Say this at hawker stalls to get a milder version.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">💸</div><div class="tip-text"><h4>Best money exchange in KL</h4><p>Avoid airport money changers — terrible rates. Best rates at licensed money changers in Bukit Bintang area. Alternatively, withdraw MYR from local ATMs.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🛥️</div><div class="tip-text"><h4>Book sunset cruise in advance</h4><p>Langkawi sunset cruises sell out in June (peak season). Book the day before at your hotel or via Klook / Viator. ~MYR 80pp — absolutely worth it!</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🏛️</div><div class="tip-text"><h4>Temple dress code</h4><p>Cover shoulders and knees at Batu Caves, Kek Lok Si, and Putra Mosque. Carry a sarong — many temples provide wraps but having your own is easier.</p></div></div>
+</div>
+
+</div>
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+function togglePack(el) {
+  el.classList.toggle('checked');
+}
+
+// Auto open Day 1
+document.addEventListener('DOMContentLoaded', () => {
+  toggleCard('card-1');
+});
+</script>
+</body>
+</html>
