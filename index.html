@@ -531,6 +531,66 @@ body::before {
 }
 .pack-item.checked .pi-check { background: #8A9A88; border-color: #8A9A88; color: white; }
 
+/* BOOKING CHECKLIST */
+.booking-section-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 1.2px;
+  text-transform: uppercase; color: #A07850;
+  margin: 20px 0 10px; display: flex; align-items: center; gap: 8px;
+}
+.booking-section-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(160,120,80,0.25), transparent);
+}
+.booking-item {
+  background: rgba(255,255,255,0.58);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-radius: 14px; padding: 13px 14px;
+  border: 1px solid rgba(200,185,168,0.35);
+  box-shadow: 0 2px 8px rgba(120,100,80,0.06);
+  margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: flex-start; gap: 11px;
+}
+.booking-item:hover { background: rgba(255,255,255,0.75); }
+.booking-item.checked {
+  background: rgba(210,225,210,0.45);
+  border-color: rgba(130,165,130,0.4);
+}
+.booking-item.checked .bk-title { text-decoration: line-through; color: #8A9A88; }
+.bk-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.bk-body { flex: 1; min-width: 0; }
+.bk-title { font-size: 13px; font-weight: 700; color: #3A2E24; margin-bottom: 3px; }
+.bk-meta { font-size: 11px; color: #8B7355; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.bk-tag {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700;
+}
+.bk-tag.confirmed { background: #E6F4EA; color: #2E7D32; }
+.bk-tag.book-now  { background: #FFF3E0; color: #E65100; }
+.bk-tag.optional  { background: #EDE7F6; color: #5E35B1; }
+.bk-tag.platform  { background: rgba(200,185,168,0.28); color: #6D5A45; }
+.bk-check {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  border: 1.5px solid rgba(180,165,148,0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; transition: all 0.2s; margin-top: 1px;
+}
+.booking-item.checked .bk-check { background: #8A9A88; border-color: #8A9A88; color: white; }
+.booking-progress-bar {
+  background: rgba(255,255,255,0.55); backdrop-filter: blur(14px);
+  border-radius: 14px; padding: 14px 16px; margin-bottom: 18px;
+  border: 1px solid rgba(200,185,168,0.3);
+}
+.booking-progress-bar h4 { font-size: 12px; font-weight: 700; color: #5A4535; margin-bottom: 8px; }
+.bk-bar-track {
+  background: rgba(200,185,168,0.3); border-radius: 99px; height: 8px; overflow: hidden;
+}
+.bk-bar-fill {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, #8A9A88, #6B8A68);
+  transition: width 0.4s ease;
+}
+.bk-bar-label { font-size: 11px; color: #8B7355; margin-top: 5px; }
+
 /* BUDGET */
 .budget-total {
   background: rgba(255,255,255,0.60);
@@ -814,6 +874,7 @@ body::before {
   <button class="nav-tab" onclick="showTab('stays')">🏠 Stays</button>
   <button class="nav-tab" onclick="showTab('food')">🍽️ Food</button>
   <button class="nav-tab" onclick="showTab('tips')">💡 Tips</button>
+  <button class="nav-tab" onclick="showTab('booking')">📋 Bookings</button>
 </div>
 
 <div class="content">
@@ -871,7 +932,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">~6:00 AM · Changi Airport</div>
           <div class="event-title">Jewel Changi — RAIN Vortex 💧</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Jewel Changi RAIN Vortex" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=200&h=200&q=80" alt="Jewel Changi RAIN Vortex" onerror="this.style.display='none'">
           <div class="event-desc">The world's tallest indoor waterfall (40m!) is free to view from the forest valley floors. Grab breakfast at one of the cafes overlooking the cascading water — absolutely surreal after a red-eye flight. Connected to T1/T2/T3 so no need to clear immigration!</div>
           <div class="event-tags"><span class="etag" style="background:#E8F5E9;color:#2D6A4F;">🌿 Must-See</span><span class="etag" style="background:#E3F2FD;color:#1565C0;">🆓 Free</span></div>
         </div>
@@ -881,7 +942,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">7:30 AM · Jewel Level 5</div>
           <div class="event-title">Shiseido Forest Valley & Canopy Park</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1516912481800-849f1dc93bc4?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Forest Valley Canopy Park" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1516912481800-849f1dc93bc4?auto=format&fit=crop&w=200&h=200&q=80" alt="Forest Valley Canopy Park" onerror="this.style.display='none'">
           <div class="event-desc">Walk through the lush indoor garden terraces — free and beautiful. If you have energy, Canopy Park (SGD 18–24pp) has sky nets, slides, and mazes above the forest. The hedge maze alone is worth it. Book online to skip queues.</div>
           <div class="event-tags"><span class="etag" style="background:#FFF8E1;color:#F57F17;">🎡 Activity</span><span class="etag" style="background:#FCE4EC;color:#880E4F;">❤️ Romantic</span></div>
         </div>
@@ -918,7 +979,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">6:30 PM</div>
           <div class="event-title">KLCC Park & Twin Towers</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Petronas Twin Towers" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=200&h=200&q=80" alt="Petronas Twin Towers" onerror="this.style.display='none'">
           <div class="event-desc">Stroll Suria KLCC at dusk. Free fountain light show at 8:30 PM — romantic and unmissable!</div>
           <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -928,7 +989,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">8:30 PM</div>
           <div class="event-title">Jalan Alor Night Market</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1552566626-52f8b828a9b7?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Jalan Alor Night Market" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1552566626-52f8b828a9b7?auto=format&fit=crop&w=200&h=200&q=80" alt="Jalan Alor Night Market" onerror="this.style.display='none'">
           <div class="event-desc">Satay, char kway teow, fresh coconut — first taste of Malaysian street food magic!</div>
           <div class="event-tags"><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
         </div>
@@ -955,7 +1016,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">7:00 AM – 9:00 AM</div>
           <div class="event-title">Batu Caves — 272 Rainbow Steps</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1566522650155-f22cfb19a1ac?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Batu Caves" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1566522650155-f22cfb19a1ac?auto=format&fit=crop&w=200&h=200&q=80" alt="Batu Caves" onerror="this.style.display='none'">
           <div class="event-desc">Iconic Hindu temple cave. Go before 9 AM to beat the heat and crowds. Colourful steps, massive golden statue!</div>
           <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span></div>
         </div>
@@ -965,7 +1026,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">9:30 AM – 11:00 AM</div>
           <div class="event-title">Thean Hou Temple</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1563492065-a00c3d240afe?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Thean Hou Temple" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1563492065-a00c3d240afe?auto=format&fit=crop&w=200&h=200&q=80" alt="Thean Hou Temple" onerror="this.style.display='none'">
           <div class="event-desc">One of the largest and most ornate Chinese temples in Southeast Asia — six tiers of red lanterns, intricate carvings, and panoramic views over KL. Peaceful in the morning before the crowds arrive. Great couple photos! Free entry.</div>
           <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span><span class="etag" style="background:#E3F2FD;color:#1565C0;">🆓 Free</span><span class="etag" style="background:#FCE4EC;color:#880E4F;">❤️ Romantic</span></div>
         </div>
@@ -975,7 +1036,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">11:00 AM – 12:30 PM</div>
           <div class="event-title">Petaling Street — Chinatown</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Petaling Street Chinatown KL" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=200&h=200&q=80" alt="Petaling Street Chinatown KL" onerror="this.style.display='none'">
           <div class="event-desc">Colourful market, kopitiam breakfast, kaya toast & soft-boiled eggs. Great for souvenirs!</div>
           <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
         </div>
@@ -985,7 +1046,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">12:30 PM – 1:30 PM</div>
           <div class="event-title">REX KL — BookXcess</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1481627834876-b7833e8f5dc8?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="REX KL BookXcess Bookshop" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1481627834876-b7833e8f5dc8?auto=format&fit=crop&w=200&h=200&q=80" alt="REX KL BookXcess Bookshop" onerror="this.style.display='none'">
           <div class="event-desc">Steps from Petaling Street! A magical labyrinth bookshop inside a repurposed 1947 cinema. Floor-to-ceiling shelves, maze-like aisles, and thousands of affordable books. One of KL's most Instagrammable spots — don't miss it.</div>
           <div class="event-tags"><span class="etag" style="background:#EEF4FF;color:#3B4FAB;">📚 Books</span><span class="etag" style="background:#E3F2FD;color:#1565C0;">🆓 Free entry</span></div>
         </div>
@@ -995,7 +1056,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">2:00 PM – 3:30 PM</div>
           <div class="event-title">Merdeka Square & KL City Gallery</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1573654975842-7044ae2e0b37?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Merdeka Square KL" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1573654975842-7044ae2e0b37?auto=format&fit=crop&w=200&h=200&q=80" alt="Merdeka Square KL" onerror="this.style.display='none'">
           <div class="event-desc">Colonial architecture, giant flagpole, brilliant 3D KL model inside. History of this incredible city!</div>
           <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span></div>
         </div>
@@ -1005,7 +1066,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">5:30 PM – 7:00 PM</div>
           <div class="event-title">Sky Bar, Traders Hotel — infinity pool sundowner</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Sky Bar KL rooftop" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=200&h=200&q=80" alt="Sky Bar KL rooftop" onerror="this.style.display='none'">
           <div class="event-desc">Overlooks Petronas Towers at golden hour. KL's most romantic rooftop. Book a table in advance!</div>
           <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -1015,7 +1076,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">7:30 PM – 9:00 PM</div>
           <div class="event-title">Bukit Bintang — Lot 10 Hutong</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1567967455389-e432b9891e16?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Malaysian hawker food" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1567967455389-e432b9891e16?auto=format&fit=crop&w=200&h=200&q=80" alt="Malaysian hawker food" onerror="this.style.display='none'">
           <div class="event-desc">Award-winning hawker classics in AC comfort. The best of Malaysian cuisine in one spot.</div>
           <div class="event-tags"><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
         </div>
@@ -1025,7 +1086,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">9:00 PM – 10:00 PM</div>
           <div class="event-title">Don Don Donki — Lot 10, Bukit Bintang</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1555069519-127aadecd674?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Don Don Donki Japanese store" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1555069519-127aadecd674?auto=format&fit=crop&w=200&h=200&q=80" alt="Don Don Donki Japanese store" onerror="this.style.display='none'">
           <div class="event-desc">Japanese discount wonderland right in the same building! Snacks, skincare, stationery, instant ramen, quirky gadgets — open till 10 PM. Perfect post-dinner browse. Stock up on Japanese treats to bring home!</div>
           <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🛍️ Shopping</span><span class="etag" style="background:#F3E8FD;color:#6A0DAD;">🇯🇵 Japanese</span></div>
         </div>
@@ -1052,7 +1113,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">9:00 AM – 11:00 AM</div>
           <div class="event-title">KL Tower Sky Deck</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="KL Tower Sky Deck" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=200&h=200&q=80" alt="KL Tower Sky Deck" onerror="this.style.display='none'">
           <div class="event-desc">360° panoramic views of KL before you fly out — perfect couple's photos with Petronas Towers in the background.</div>
           <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -1080,7 +1141,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">6:00 PM – 9:00 PM</div>
           <div class="event-title">Eagle Square sunset + seafood dinner</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1519046904884-53ff686c8d1c?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Langkawi waterfront sunset" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1519046904884-53ff686c8d1c?auto=format&fit=crop&w=200&h=200&q=80" alt="Langkawi waterfront sunset" onerror="this.style.display='none'">
           <div class="event-desc">Dataran Lang (giant eagle statue) at the waterfront for sunset. Then Pantai Cenang for grilled tiger prawns by the sea. Duty-free drinks! 🦞</div>
           <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
         </div>
@@ -1109,7 +1170,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">9:00 AM – 12:00 PM</div>
           <div class="event-title">Pantai Cenang Beach</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Pantai Cenang Beach Langkawi" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=200&h=200&q=80" alt="Pantai Cenang Beach Langkawi" onerror="this.style.display='none'">
           <div class="event-desc">White sand, turquoise Andaman Sea water. Swim, sunbathe, jet ski. Duty-free beach bars — bliss!</div>
           <div class="event-tags"><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -1119,7 +1180,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">1:00 PM – 3:30 PM</div>
           <div class="event-title">Langkawi Sky Cab & SkyBridge</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1601999109961-20de3b4d53cb?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Langkawi Sky Cab cable car" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1601999109961-20de3b4d53cb?auto=format&fit=crop&w=200&h=200&q=80" alt="Langkawi Sky Cab cable car" onerror="this.style.display='none'">
           <div class="event-desc">One of the world's steepest cable cars! Jaw-dropping views over jungle canopy & Andaman Sea. Curved SkyBridge at the top is iconic. Book online (~MYR 55pp).</div>
           <div class="event-tags"><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -1129,7 +1190,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">5:30 PM – 7:00 PM</div>
           <div class="event-title">Island-hopping Sunset Cruise 🌅</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Langkawi sunset cruise" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&q=80" alt="Langkawi sunset cruise" onerror="this.style.display='none'">
           <div class="event-desc">1.5 hr cruise around Langkawi's islands at golden hour. THE most romantic experience in Malaysia. Book ahead (~MYR 80pp).</div>
           <div class="event-tags"><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -1139,7 +1200,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">7:30 PM – 9:30 PM</div>
           <div class="event-title">The Cliff Restaurant — romantic hilltop dinner</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="The Cliff Restaurant hilltop sea view" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=200&h=200&q=80" alt="The Cliff Restaurant hilltop sea view" onerror="this.style.display='none'">
           <div class="event-desc">Elevated hilltop restaurant with sweeping sea views. Special couple's dinner — book in advance!</div>
           <div class="event-tags"><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -1166,7 +1227,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">8:00 AM – 11:00 AM</div>
           <div class="event-title">Kilim Karst Geoforest — Mangrove Boat Tour</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1548695818-ca84d3eb13f5?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Kilim Karst Mangrove Geoforest" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1548695818-ca84d3eb13f5?auto=format&fit=crop&w=200&h=200&q=80" alt="Kilim Karst Mangrove Geoforest" onerror="this.style.display='none'">
           <div class="event-desc">UNESCO Geopark — eagles, monitor lizards, monkeys through ancient mangroves. Magical half-day boat tour (~MYR 100pp).</div>
           <div class="event-tags"><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -1176,7 +1237,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">11:00 AM – 12:30 PM</div>
           <div class="event-title">Pulau Dayang Bunting — Pregnant Maiden Lake</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Pregnant Maiden Lake Langkawi" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?auto=format&fit=crop&w=200&h=200&q=80" alt="Pregnant Maiden Lake Langkawi" onerror="this.style.display='none'">
           <div class="event-desc">Freshwater lake inside a jungle island — swim surrounded by limestone cliffs. Serene and beautiful.</div>
           <div class="event-tags"><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span></div>
         </div>
@@ -1204,7 +1265,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">Night · 7 PM – 10 PM</div>
           <div class="event-title">Dream Forest Langkawi — Immersive Night Rainforest</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1550159930-40066082a4fc?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Dream Forest Langkawi night illumination" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1550159930-40066082a4fc?auto=format&fit=crop&w=200&h=200&q=80" alt="Dream Forest Langkawi night illumination" onerror="this.style.display='none'">
           <div class="event-desc">Malaysia's first immersive night rainforest experience! A 1.2 km glowing trail through Langkawi's jungle, bringing local myths and legends to life with stunning digital light installations and soundscapes. The perfect magical farewell to the island ✨</div>
           <div class="event-tags"><span class="etag" style="background:#EEF0FF;color:#3B4FAB;">🌌 Night</span><span class="etag" style="background:#EAF3DE;color:#3B6D11;">🌿 Nature</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -1242,7 +1303,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">2:30 PM – 6:30 PM</div>
           <div class="event-title">Free time — Malls & Shopping</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="KL shopping mall" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=200&h=200&q=80" alt="KL shopping mall" onerror="this.style.display='none'">
           <div class="event-desc">Unwind after the flight with a relaxed mall crawl! Hit Pavilion KL or Suria KLCC for fashion and brands, Mid Valley for variety, or The Exchange TRX for the HEYTEA + Super Matcha + Tofu G dessert crawl. No agenda — just browse and enjoy!</div>
           <div class="event-tags"><span class="etag" style="background:#FFF3CD;color:#856404;">🛍️ Shopping</span><span class="etag" style="background:#FAEEDA;color:#854F0B;">🍴 Food</span></div>
         </div>
@@ -1287,7 +1348,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">9:30 AM – 12:00 PM</div>
           <div class="event-title">Dutch Square, A Famosa & St Paul's Hill</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Malacca Dutch Square colonial" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=200&h=200&q=80" alt="Malacca Dutch Square colonial" onerror="this.style.display='none'">
           <div class="event-desc">500-year-old Portuguese fort ruins, red colonial buildings, hilltop church with sweeping views. Compact and walkable UNESCO heritage zone.</div>
           <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span></div>
         </div>
@@ -1306,7 +1367,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">2:00 PM – 5:00 PM</div>
           <div class="event-title">Jonker Walk & Malacca River Cruise</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1536784347783-e34ecf12f9b6?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Jonker Walk Malacca river" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1536784347783-e34ecf12f9b6?auto=format&fit=crop&w=200&h=200&q=80" alt="Jonker Walk Malacca river" onerror="this.style.display='none'">
           <div class="event-desc">Antiques, street food, and a romantic river cruise past colourful murals and heritage shophouses.</div>
           <div class="event-tags"><span class="etag" style="background:#E6F1FB;color:#185FA5;">🏛️ Culture</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -1351,7 +1412,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">9:00 AM – 6:00 PM</div>
           <div class="event-title">Genting SkyWorlds Theme Park 🎉</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1534438327276-14e5300caee5?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Genting SkyWorlds Theme Park" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1534438327276-14e5300caee5?auto=format&fit=crop&w=200&h=200&q=80" alt="Genting SkyWorlds Theme Park" onerror="this.style.display='none'">
           <div class="event-desc">Malaysia's best theme park — Ice Age, Rio, Kung Fu Panda zones! Full day of rides and fun. Book tickets online in advance (~MYR 180–200pp). BRING A JACKET!</div>
           <div class="event-tags"><span class="etag" style="background:#FAECE7;color:#993C1D;">🎢 Fun</span><span class="etag" style="background:#FFE8E8;color:#cc0000;">❤️ Romantic</span></div>
         </div>
@@ -1387,7 +1448,7 @@ body::before {
         <div class="event-content">
           <div class="event-time">10:00 AM – 2:00 PM</div>
           <div class="event-title">Sunway Lagoon OR last-minute shopping</div>
-          <img class="event-img" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=200w=600&h=280&q=80h=200w=600&h=280&q=80q=80" alt="Sunway Lagoon water park" onerror="this.style.display='none'">
+          <img class="event-img" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=200&h=200&q=80" alt="Sunway Lagoon water park" onerror="this.style.display='none'">
           <div class="event-desc">Late flight (22:00) so you have the full day! Sunway Lagoon (~MYR 180pp) for a fun final day, or KLCC / Central Market for batik, Beryl's chocolates, pewter, and Twin Towers souvenirs.</div>
           <div class="event-tags"><span class="etag" style="background:#FAECE7;color:#993C1D;">🎢 Fun</span><span class="etag" style="background:#FFF3CD;color:#856404;">🛍️ Shopping</span></div>
         </div>
@@ -2250,6 +2311,312 @@ body::before {
   <div class="tip-card"><div class="tip-emoji">🏨</div><div class="tip-text"><h4>Luggage storage tip</h4><p>Ask The Colony Infinitum to store your Langkawi bags on 19 Jun — reputable hotels do this for free. Pick them up on 22 Jun when you return. Saves you paying for extra Langkawi luggage.</p></div></div>
 </div>
 
+<!-- ======== BOOKING CHECKLIST TAB ======== -->
+<div id="tab-booking" class="tab-pane">
+
+  <div class="booking-progress-bar" id="bk-progress-wrap">
+    <h4>📋 Booking Progress</h4>
+    <div class="bk-bar-track"><div class="bk-bar-fill" id="bk-bar" style="width:0%"></div></div>
+    <div class="bk-bar-label" id="bk-bar-label">0 of 18 items confirmed</div>
+  </div>
+
+  <!-- FLIGHTS -->
+  <div class="booking-section-label">✈️ Flights — Pre-confirmed</div>
+
+  <div class="booking-item checked" onclick="toggleBooking(this)">
+    <div class="bk-icon">🛫</div>
+    <div class="bk-body">
+      <div class="bk-title">Mumbai (BOM) → Singapore (SIN)</div>
+      <div class="bk-meta">
+        <span>📅 16 Jun (Tue) · 23:40</span>
+        <span class="bk-tag confirmed">✅ Confirmed</span>
+      </div>
+    </div>
+    <div class="bk-check">✓</div>
+  </div>
+
+  <div class="booking-item checked" onclick="toggleBooking(this)">
+    <div class="bk-icon">🛬</div>
+    <div class="bk-body">
+      <div class="bk-title">Singapore (SIN) → Kuala Lumpur (KUL)</div>
+      <div class="bk-meta">
+        <span>📅 17 Jun (Wed) · 14:30 → 15:45</span>
+        <span class="bk-tag confirmed">✅ Confirmed</span>
+      </div>
+    </div>
+    <div class="bk-check">✓</div>
+  </div>
+
+  <div class="booking-item checked" onclick="toggleBooking(this)">
+    <div class="bk-icon">🛫</div>
+    <div class="bk-body">
+      <div class="bk-title">Kuala Lumpur (KUL) → Langkawi (LGK)</div>
+      <div class="bk-meta">
+        <span>📅 19 Jun (Fri) · 15:50</span>
+        <span class="bk-tag confirmed">✅ Confirmed</span>
+      </div>
+    </div>
+    <div class="bk-check">✓</div>
+  </div>
+
+  <div class="booking-item checked" onclick="toggleBooking(this)">
+    <div class="bk-icon">🛬</div>
+    <div class="bk-body">
+      <div class="bk-title">Langkawi (LGK) → Kuala Lumpur (KUL)</div>
+      <div class="bk-meta">
+        <span>📅 22 Jun (Mon) · 11:15 → 12:30</span>
+        <span class="bk-tag confirmed">✅ Confirmed</span>
+      </div>
+    </div>
+    <div class="bk-check">✓</div>
+  </div>
+
+  <div class="booking-item checked" onclick="toggleBooking(this)">
+    <div class="bk-icon">🛫</div>
+    <div class="bk-body">
+      <div class="bk-title">Kuala Lumpur (KUL) → Singapore (SIN)</div>
+      <div class="bk-meta">
+        <span>📅 25 Jun (Thu) · 22:00</span>
+        <span class="bk-tag confirmed">✅ Confirmed</span>
+      </div>
+    </div>
+    <div class="bk-check">✓</div>
+  </div>
+
+  <div class="booking-item checked" onclick="toggleBooking(this)">
+    <div class="bk-icon">🛬</div>
+    <div class="bk-body">
+      <div class="bk-title">Singapore (SIN) → Mumbai (BOM)</div>
+      <div class="bk-meta">
+        <span>📅 26 Jun (Fri) · 07:50 → 10:30</span>
+        <span class="bk-tag confirmed">✅ Confirmed</span>
+      </div>
+    </div>
+    <div class="bk-check">✓</div>
+  </div>
+
+  <!-- ACCOMMODATION -->
+  <div class="booking-section-label">🏠 Accommodation</div>
+
+  <div class="booking-item checked" onclick="toggleBooking(this)">
+    <div class="bk-icon">🏙️</div>
+    <div class="bk-body">
+      <div class="bk-title">The Colony Infinitum, KL</div>
+      <div class="bk-meta">
+        <span>📅 17–19 Jun · 2 nights</span>
+        <span class="bk-tag confirmed">✅ Confirmed</span>
+        <span class="bk-tag platform">Hotel direct</span>
+      </div>
+    </div>
+    <div class="bk-check">✓</div>
+  </div>
+
+  <div class="booking-item checked" onclick="toggleBooking(this)">
+    <div class="bk-icon">🌴</div>
+    <div class="bk-body">
+      <div class="bk-title">The Frangipani Langkawi Resort</div>
+      <div class="bk-meta">
+        <span>📅 19–22 Jun · 3 nights</span>
+        <span class="bk-tag confirmed">✅ Confirmed</span>
+        <span class="bk-tag platform">Hotel direct</span>
+      </div>
+    </div>
+    <div class="bk-check">✓</div>
+  </div>
+
+  <div class="booking-item checked" onclick="toggleBooking(this)">
+    <div class="bk-icon">🏠</div>
+    <div class="bk-body">
+      <div class="bk-title">Home in KL by Man (Airbnb)</div>
+      <div class="bk-meta">
+        <span>📅 22–25 Jun · 3 nights</span>
+        <span class="bk-tag confirmed">✅ Confirmed</span>
+        <span class="bk-tag platform">Airbnb</span>
+      </div>
+    </div>
+    <div class="bk-check">✓</div>
+  </div>
+
+  <!-- EXPERIENCES -->
+  <div class="booking-section-label">🎡 Experiences & Attractions</div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">💧</div>
+    <div class="bk-body">
+      <div class="bk-title">Canopy Park — Jewel Changi Airport</div>
+      <div class="bk-meta">
+        <span>📅 17 Jun · ~SGD 18–24 pp</span>
+        <span class="bk-tag book-now">📌 Book online</span>
+        <span class="bk-tag platform">Jewel website / Klook</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🗼</div>
+    <div class="bk-body">
+      <div class="bk-title">KL Tower Sky Deck</div>
+      <div class="bk-meta">
+        <span>📅 19 Jun · ~MYR 52 pp</span>
+        <span class="bk-tag book-now">📌 Book online</span>
+        <span class="bk-tag platform">Klook / KL Tower site</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🚡</div>
+    <div class="bk-body">
+      <div class="bk-title">Langkawi Sky Cab & SkyBridge</div>
+      <div class="bk-meta">
+        <span>📅 20 Jun · ~MYR 55 pp</span>
+        <span class="bk-tag book-now">📌 Book online</span>
+        <span class="bk-tag platform">Klook / official site</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🌅</div>
+    <div class="bk-body">
+      <div class="bk-title">Island-hopping Sunset Cruise</div>
+      <div class="bk-meta">
+        <span>📅 20 Jun · ~MYR 80 pp</span>
+        <span class="bk-tag book-now">📌 Book in advance</span>
+        <span class="bk-tag platform">Klook / Viator / Hotel</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🦅</div>
+    <div class="bk-body">
+      <div class="bk-title">Kilim Karst Geoforest — Mangrove Boat Tour</div>
+      <div class="bk-meta">
+        <span>📅 21 Jun · ~MYR 100 pp</span>
+        <span class="bk-tag book-now">📌 Book ahead</span>
+        <span class="bk-tag platform">Klook / Hotel desk</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🌲</div>
+    <div class="bk-body">
+      <div class="bk-title">Dream Forest Langkawi — Night Rainforest</div>
+      <div class="bk-meta">
+        <span>📅 21 Jun (evening)</span>
+        <span class="bk-tag book-now">📌 Book online</span>
+        <span class="bk-tag platform">Dream Forest website</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🎢</div>
+    <div class="bk-body">
+      <div class="bk-title">Genting SkyWorlds Theme Park</div>
+      <div class="bk-meta">
+        <span>📅 24 Jun · ~MYR 180–200 pp</span>
+        <span class="bk-tag book-now">📌 Book in advance</span>
+        <span class="bk-tag platform">Klook / official site</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">💦</div>
+    <div class="bk-body">
+      <div class="bk-title">Sunway Lagoon Water Park</div>
+      <div class="bk-meta">
+        <span>📅 25 Jun · ~MYR 180 pp</span>
+        <span class="bk-tag optional">🔮 Optional</span>
+        <span class="bk-tag platform">Klook</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <!-- RESTAURANTS -->
+  <div class="booking-section-label">🍽️ Restaurants — Reserve a Table</div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🌃</div>
+    <div class="bk-body">
+      <div class="bk-title">Sky Bar, Traders Hotel KL</div>
+      <div class="bk-meta">
+        <span>📅 18 Jun (evening)</span>
+        <span class="bk-tag book-now">📌 Book table</span>
+        <span class="bk-tag platform">Zomato / Hotel direct</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🌊</div>
+    <div class="bk-body">
+      <div class="bk-title">The Cliff Restaurant — Langkawi</div>
+      <div class="bk-meta">
+        <span>📅 20 Jun (dinner)</span>
+        <span class="bk-tag book-now">📌 Book table</span>
+        <span class="bk-tag platform">Restaurant direct</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <!-- TRANSPORT -->
+  <div class="booking-section-label">🚌 Transport</div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🚆</div>
+    <div class="bk-body">
+      <div class="bk-title">KLIA Ekspres — KLIA ↔ KL Sentral</div>
+      <div class="bk-meta">
+        <span>📅 17 Jun & 25 Jun · MYR 55 pp each way</span>
+        <span class="bk-tag book-now">📌 Buy tickets</span>
+        <span class="bk-tag platform">klia2.com.my / Klook</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🚍</div>
+    <div class="bk-body">
+      <div class="bk-title">Bus TBS → Malacca (return)</div>
+      <div class="bk-meta">
+        <span>📅 23 Jun · ~MYR 20 pp each way</span>
+        <span class="bk-tag book-now">📌 Buy tickets</span>
+        <span class="bk-tag platform">Causewaylink / Transnasional</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+  <div class="booking-item" onclick="toggleBooking(this)">
+    <div class="bk-icon">🚌</div>
+    <div class="bk-body">
+      <div class="bk-title">Bus + Cable Car to Genting Highlands</div>
+      <div class="bk-meta">
+        <span>📅 24 Jun · ~MYR 10 pp bus + cable car</span>
+        <span class="bk-tag book-now">📌 Buy at counter</span>
+        <span class="bk-tag platform">Pudu Raya terminal / Klook</span>
+      </div>
+    </div>
+    <div class="bk-check"></div>
+  </div>
+
+</div>
+
 </div>
 
 <script>
@@ -2268,6 +2635,28 @@ function toggleCard(id) {
 function togglePack(el) {
   el.classList.toggle('checked');
 }
+
+function toggleBooking(el) {
+  el.classList.toggle('checked');
+  const check = el.querySelector('.bk-check');
+  check.textContent = el.classList.contains('checked') ? '✓' : '';
+  updateBookingProgress();
+}
+
+function updateBookingProgress() {
+  const items = document.querySelectorAll('.booking-item');
+  const checked = document.querySelectorAll('.booking-item.checked');
+  const total = items.length;
+  const done = checked.length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  const bar = document.getElementById('bk-bar');
+  const label = document.getElementById('bk-bar-label');
+  if (bar) bar.style.width = pct + '%';
+  if (label) label.textContent = done + ' of ' + total + ' items confirmed';
+}
+
+// Init booking progress on load
+document.addEventListener('DOMContentLoaded', updateBookingProgress);
 
 </script>
 </body>
