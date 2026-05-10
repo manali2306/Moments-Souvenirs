@@ -489,6 +489,28 @@ body::before {
 .weather-card .wc-desc { font-size: 11.5px; color: #8A7A6A; margin-bottom: 6px; }
 .weather-card .wc-stat { font-size: 11.5px; font-weight: 600; color: #7A6A58; }
 
+/* DAY CARD IMAGES */
+.day-img-wrap {
+  width: 100%; height: 160px; overflow: hidden;
+  border-radius: 16px; margin-bottom: 14px;
+  background: linear-gradient(135deg, #EDE6DA, #D4C8B8);
+  position: relative;
+}
+.day-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  border-radius: 16px; display: block;
+  transition: transform 0.4s ease;
+}
+.day-img-wrap:hover img { transform: scale(1.04); }
+.day-img-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 6px 12px;
+  background: linear-gradient(transparent, rgba(30,20,10,0.52));
+  border-radius: 0 0 16px 16px;
+  font-size: 11px; color: rgba(255,255,255,0.9);
+  font-weight: 600; letter-spacing: 0.3px;
+}
+
 /* PACK LIST */
 .pack-section { margin-bottom: 16px; }
 .pack-section h4 {
@@ -827,6 +849,10 @@ body::before {
       <div class="day-toggle">⌄</div>
     </div>
     <div class="day-body">
+      <div class="day-img-wrap">
+        <img src="https://images.unsplash.com/photo-1525625293133-d4c0e7a3a4ef?auto=format&fit=crop&w=700&h=320&q=80" alt="Singapore" onerror="this.style.display='none'">
+        <div class="day-img-caption">✈️ Singapore — Changi Airport</div>
+      </div>
       <div class="event-item">
         <div class="event-icon" style="background:#F0EBFF;">🌙</div>
         <div class="event-content">
@@ -856,6 +882,10 @@ body::before {
       <div class="day-toggle">⌄</div>
     </div>
     <div class="day-body">
+      <div class="day-img-wrap">
+        <img src="https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=700&h=320&q=80" alt="Jewel Changi" onerror="this.style.display='none'">
+        <div class="day-img-caption">💧 Jewel Changi — RAIN Vortex & Kuala Lumpur</div>
+      </div>
       <div class="event-item">
         <div class="event-icon" style="background:#E8F5E9;">🌿</div>
         <div class="event-content">
@@ -936,6 +966,10 @@ body::before {
       <div class="day-toggle">⌄</div>
     </div>
     <div class="day-body">
+      <div class="day-img-wrap">
+        <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=700&h=320&q=80" alt="Kuala Lumpur" onerror="this.style.display='none'">
+        <div class="day-img-caption">🏙️ Kuala Lumpur — Batu Caves · Chinatown · Sky Bar</div>
+      </div>
       <div class="event-item">
         <div class="event-icon" style="background:#FFF0F0;">🪨</div>
         <div class="event-content">
@@ -1025,6 +1059,10 @@ body::before {
       <div class="day-toggle">⌄</div>
     </div>
     <div class="day-body">
+      <div class="day-img-wrap">
+        <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=700&h=320&q=80" alt="Langkawi" onerror="this.style.display='none'">
+        <div class="day-img-caption">🏝️ KL Tower → Flying to Langkawi Paradise</div>
+      </div>
       <div class="event-item">
         <div class="event-icon" style="background:#FFE8E8;">🗼</div>
         <div class="event-content">
@@ -1080,6 +1118,10 @@ body::before {
       <div class="day-toggle">⌄</div>
     </div>
     <div class="day-body">
+      <div class="day-img-wrap">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&h=320&q=80" alt="Langkawi Beach" onerror="this.style.display='none'">
+        <div class="day-img-caption">🏖️ Pantai Cenang Beach · Sky Cab · Sunset Cruise</div>
+      </div>
       <div class="event-item">
         <div class="event-icon" style="background:#E0F4FF;">🏖️</div>
         <div class="event-content">
@@ -1133,6 +1175,10 @@ body::before {
       <div class="day-toggle">⌄</div>
     </div>
     <div class="day-body">
+      <div class="day-img-wrap">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=700&h=320&q=80" alt="Mangrove Langkawi" onerror="this.style.display='none'">
+        <div class="day-img-caption">🦅 Kilim Geoforest Mangroves · Langkawi</div>
+      </div>
       <div class="event-item">
         <div class="event-icon" style="background:#E8FFF6;">🦅</div>
         <div class="event-content">
@@ -1197,6 +1243,10 @@ body::before {
       <div class="day-toggle">⌄</div>
     </div>
     <div class="day-body">
+      <div class="day-img-wrap">
+        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=700&h=320&q=80" alt="Kuala Lumpur Night" onerror="this.style.display='none'">
+        <div class="day-img-caption">🛍️ Back to KL — Malls & Bukit Bintang</div>
+      </div>
       <div class="event-item">
         <div class="event-icon" style="background:#E0F4FF;">✈️</div>
         <div class="event-content">
@@ -1241,6 +1291,10 @@ body::before {
       <div class="day-toggle">⌄</div>
     </div>
     <div class="day-body">
+      <div class="day-img-wrap">
+        <img src="https://images.unsplash.com/photo-1570168007204-dfb527cc7c96?auto=format&fit=crop&w=700&h=320&q=80" alt="Malacca" onerror="this.style.display='none'">
+        <div class="day-img-caption">🏰 Malacca — UNESCO World Heritage City</div>
+      </div>
       <div class="event-item">
         <div class="event-icon" style="background:#F0EBFF;">🚌</div>
         <div class="event-content">
@@ -1303,6 +1357,10 @@ body::before {
       <div class="day-toggle">⌄</div>
     </div>
     <div class="day-body">
+      <div class="day-img-wrap">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&h=320&q=80" alt="Genting Highlands" onerror="this.style.display='none'">
+        <div class="day-img-caption">🎢 Genting Highlands — SkyWorlds Theme Park</div>
+      </div>
       <div class="event-item">
         <div class="event-icon" style="background:#FFF0F0;">🚠</div>
         <div class="event-content">
@@ -1347,6 +1405,10 @@ body::before {
       <div class="day-toggle">⌄</div>
     </div>
     <div class="day-body">
+      <div class="day-img-wrap">
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=700&h=320&q=80" alt="KL Airport Departure" onerror="this.style.display='none'">
+        <div class="day-img-caption">✈️ Final Day in KL — Goodbye Malaysia 🇲🇾</div>
+      </div>
       <div class="event-item">
         <div class="event-icon" style="background:#FFF3CD;">🛍️</div>
         <div class="event-content">
@@ -2182,16 +2244,36 @@ body::before {
 <div id="tab-tips" class="tab-pane">
   <div class="day-section-label">💡 Essential Tips</div>
 
+  <div class="day-section-label" style="font-size:13px;margin-bottom:8px;">🚌 Getting Around</div>
   <div class="tip-card"><div class="tip-emoji">🚇</div><div class="tip-text"><h4>KLIA Ekspres — fastest way into KL</h4><p>28 min from KLIA to KL Sentral, MYR 55pp. Book online for convenience. Way faster than Grab from the airport.</p></div></div>
   <div class="tip-card"><div class="tip-emoji">📱</div><div class="tip-text"><h4>Grab is your best friend</h4><p>Use Grab for all taxis in Malaysia — safer, metered, and much cheaper than street taxis. Download before you land!</p></div></div>
-  <div class="tip-card"><div class="tip-emoji">🏨</div><div class="tip-text"><h4>Same KL hotel for both stays</h4><p>Book the same KLCC hotel for 17–18 Jun AND 22–24 Jun. Ask them to store your Langkawi bags for free on 19 Jun — lifesaver!</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">💳</div><div class="tip-text"><h4>Get a Touch 'n Go card</h4><p>Malaysia's all-in-one transit card — works on MRT, LRT, monorail, buses, and toll roads. Get one at KL Sentral (MYR 10 card + top-up). Saves you queuing for tickets every time.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🗺️</div><div class="tip-text"><h4>Download Google Maps offline</h4><p>Download the KL and Langkawi offline maps before you fly. Malaysian mobile data can be patchy in remote areas. Also download Moovit for public transport directions in KL.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">📶</div><div class="tip-text"><h4>Buy a local SIM at the airport</h4><p>Grab a Maxis, Celcom, or Digi prepaid SIM at KLIA arrivals — ~MYR 30–50 for 10–20 GB, valid 30 days. Much cheaper than roaming. Activate immediately to use Grab from the airport.</p></div></div>
+
+  <div class="day-section-label" style="font-size:13px;margin-bottom:8px;">💰 Money & Safety</div>
+  <div class="tip-card"><div class="tip-emoji">💸</div><div class="tip-text"><h4>Best money exchange in KL</h4><p>Avoid airport money changers — terrible rates. Best rates at licensed money changers in Bukit Bintang area (near Pavilion). Alternatively, withdraw MYR from local ATMs with a travel card.</p></div></div>
   <div class="tip-card"><div class="tip-emoji">⛽</div><div class="tip-text"><h4>Langkawi is duty-free!</h4><p>Alcohol, chocolates, perfumes are significantly cheaper. Stock up before flying back to KL — airport limits apply on the return.</p></div></div>
-  <div class="tip-card"><div class="tip-emoji">🎢</div><div class="tip-text"><h4>Book Genting SkyWorlds online</h4><p>Tickets are cheaper online than at the gate. Also skips the queue. And seriously — bring a jacket. Genting is COLD!</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🏧</div><div class="tip-text"><h4>Use Wise or Revolut for spending</h4><p>Load MYR on a Wise/Revolut card before you go — interbank exchange rates with no hidden fees. Perfect backup to cash. Works at most Malaysian ATMs and card machines.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">👜</div><div class="tip-text"><h4>Watch your belongings in busy areas</h4><p>Petaling Street, Jalan Alor, and Central Market can get crowded. Use a crossbody bag and keep phones in front pockets. Avoid displaying expensive cameras/jewellery in hawker areas.</p></div></div>
+
+  <div class="day-section-label" style="font-size:13px;margin-bottom:8px;">🍽️ Food & Culture</div>
+  <div class="tip-card"><div class="tip-emoji">🌶️</div><div class="tip-text"><h4>Ask for "kurang pedas"</h4><p>Means "less spicy" in Malay — Malaysian spice levels can catch Indians off guard! Say this at hawker stalls to get a milder version. "Tak nak pedas" = no spice at all.</p></div></div>
   <div class="tip-card"><div class="tip-emoji">💧</div><div class="tip-text"><h4>Only drink bottled water</h4><p>Tap water in Malaysia is technically treated but stick to bottled throughout. Buy big bottles from convenience stores — way cheaper than hotel mini-bars.</p></div></div>
-  <div class="tip-card"><div class="tip-emoji">🌶️</div><div class="tip-text"><h4>Ask for "kurang pedas"</h4><p>Means "less spicy" in Malay — Malaysian spice levels can catch Indians off guard! Say this at hawker stalls to get a milder version.</p></div></div>
-  <div class="tip-card"><div class="tip-emoji">💸</div><div class="tip-text"><h4>Best money exchange in KL</h4><p>Avoid airport money changers — terrible rates. Best rates at licensed money changers in Bukit Bintang area. Alternatively, withdraw MYR from local ATMs.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🕌</div><div class="tip-text"><h4>Useful Malay phrases</h4><p>"Terima kasih" (thank you) · "Berapa harga?" (how much?) · "Sedap!" (delicious!) · "Tolong" (please/help) · "Di mana?" (where is?). Locals absolutely love it when you try!</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🐄</div><div class="tip-text"><h4>Confirm "vegetarian" clearly</h4><p>Say "saya vegetarian, tiada daging, tiada ayam, tiada ikan" (I'm vegetarian, no meat, no chicken, no fish). Some Malaysians consider chicken/fish as "not meat" — always double-check!</p></div></div>
+
+  <div class="day-section-label" style="font-size:13px;margin-bottom:8px;">🏛️ Attractions & Etiquette</div>
+  <div class="tip-card"><div class="tip-emoji">🏛️</div><div class="tip-text"><h4>Temple dress code</h4><p>Cover shoulders and knees at Batu Caves, Thean Hou Temple, and Putra Mosque. Carry a sarong — many temples provide wraps but having your own is easier and faster.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">👟</div><div class="tip-text"><h4>Remove shoes at temples & homes</h4><p>Always remove footwear before entering temples, mosques, and if invited to a local home. Look for the shoe rack at the entrance — if others' shoes are there, yours should be too.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🎢</div><div class="tip-text"><h4>Book attractions online in advance</h4><p>Genting SkyWorlds, Sky Cab, Batu Caves, and KL Tower are cheaper and queue-skip on Klook. June is peak season — book at least 2–3 days ahead to avoid sell-outs.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">📸</div><div class="tip-text"><h4>Best photo spots in KL</h4><p>Petronas Towers from KLCC Park (free, best at blue hour ~7 PM) · Thean Hou Temple lanterns · Batu Caves from the bottom steps · Sky Bar rooftop · Jalan Alor neon signs at night.</p></div></div>
+
+  <div class="day-section-label" style="font-size:13px;margin-bottom:8px;">🌦️ Weather & Health</div>
+  <div class="tip-card"><div class="tip-emoji">☀️</div><div class="tip-text"><h4>June = Hot & occasional rain</h4><p>Expect 30–34°C in KL and Langkawi. Carry a compact umbrella daily — tropical downpours can hit suddenly but pass in 30 min. Mornings are best for outdoor sightseeing.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🧴</div><div class="tip-text"><h4>Sunscreen is non-negotiable</h4><p>UV index in Malaysia regularly hits 11+ (extreme). Apply SPF 50 before any outdoor activity, reapply every 2 hours at the beach. Hats and rash guards for Langkawi beach days.</p></div></div>
   <div class="tip-card"><div class="tip-emoji">🛥️</div><div class="tip-text"><h4>Book sunset cruise in advance</h4><p>Langkawi sunset cruises sell out in June (peak season). Book the day before at your hotel or via Klook / Viator. ~MYR 80pp — absolutely worth it!</p></div></div>
-  <div class="tip-card"><div class="tip-emoji">🏛️</div><div class="tip-text"><h4>Temple dress code</h4><p>Cover shoulders and knees at Batu Caves, Kek Lok Si, and Putra Mosque. Carry a sarong — many temples provide wraps but having your own is easier.</p></div></div>
+  <div class="tip-card"><div class="tip-emoji">🏨</div><div class="tip-text"><h4>Luggage storage tip</h4><p>Ask The Colony Infinitum to store your Langkawi bags on 19 Jun — reputable hotels do this for free. Pick them up on 22 Jun when you return. Saves you paying for extra Langkawi luggage.</p></div></div>
 </div>
 
 </div>
