@@ -531,6 +531,92 @@ body::before {
 }
 .pack-item.checked .pi-check { background: #8A9A88; border-color: #8A9A88; color: white; }
 
+/* GETTING AROUND TAB */
+.travel-day {
+  background: rgba(255,255,255,0.58);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-radius: 18px; margin-bottom: 12px;
+  border: 1px solid rgba(200,185,168,0.35);
+  box-shadow: 0 3px 12px rgba(120,100,80,0.07);
+  overflow: hidden;
+}
+.travel-day-header {
+  padding: 14px 16px; display: flex; align-items: center; gap: 11px;
+  cursor: pointer; user-select: none;
+}
+.travel-day-date {
+  background: linear-gradient(135deg,#8B6F47,#A07850);
+  color: white; border-radius: 10px; padding: 4px 10px;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.3px; flex-shrink: 0;
+}
+.travel-day-title {
+  font-size: 13px; font-weight: 700; color: #3A2E24; flex: 1;
+}
+.travel-day-toggle {
+  font-size: 14px; color: #A07850; transition: transform 0.25s;
+}
+.travel-day.open .travel-day-toggle { transform: rotate(180deg); }
+.travel-day-body { display: none; padding: 0 14px 14px; }
+.travel-day.open .travel-day-body { display: block; }
+.travel-step {
+  display: flex; gap: 0; flex-direction: column;
+  position: relative; padding-left: 36px; margin-bottom: 4px;
+}
+.travel-step::before {
+  content: ''; position: absolute; left: 13px; top: 28px; bottom: -4px;
+  width: 2px; background: linear-gradient(180deg,rgba(160,120,80,0.3),transparent);
+}
+.travel-step:last-child::before { display: none; }
+.travel-leg {
+  background: rgba(255,255,255,0.62);
+  border-radius: 13px; padding: 11px 13px; margin-bottom: 6px;
+  border: 1px solid rgba(200,185,168,0.28);
+  position: relative;
+}
+.travel-mode-dot {
+  position: absolute; left: -25px; top: 12px;
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; border: 2px solid rgba(255,255,255,0.85);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+}
+.travel-mode-dot.grab   { background: #1DA462; }
+.travel-mode-dot.mrt    { background: #D9173A; }
+.travel-mode-dot.bus    { background: #2C6FBF; }
+.travel-mode-dot.walk   { background: #E8A838; }
+.travel-mode-dot.train  { background: #7B5EA7; }
+.travel-mode-dot.flight { background: #4A90C4; }
+.travel-mode-dot.taxi   { background: #1DA462; }
+.travel-route {
+  font-size: 12px; font-weight: 700; color: #3A2E24; margin-bottom: 5px;
+  display: flex; align-items: center; gap: 6px;
+}
+.travel-route .arrow { color: #A07850; font-size: 11px; }
+.travel-chips {
+  display: flex; flex-wrap: wrap; gap: 5px; align-items: center; margin-top: 5px;
+}
+.travel-chip {
+  font-size: 10px; font-weight: 700; padding: 2px 8px;
+  border-radius: 20px; display: inline-flex; align-items: center; gap: 3px;
+}
+.travel-chip.mode  { background: rgba(139,111,71,0.12); color: #6D4E2A; }
+.travel-chip.time  { background: rgba(70,130,180,0.12); color: #2A5F8F; }
+.travel-chip.cost  { background: rgba(40,160,80,0.12);  color: #1A6B35; }
+.travel-chip.free  { background: rgba(40,160,80,0.18);  color: #1A6B35; }
+.travel-map-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; font-weight: 700; color: #8B6F47;
+  background: rgba(139,111,71,0.10); border-radius: 20px;
+  padding: 2px 9px; text-decoration: none;
+  border: 1px solid rgba(139,111,71,0.2); transition: background 0.2s;
+}
+.travel-map-btn:hover { background: rgba(139,111,71,0.18); }
+.travel-note {
+  font-size: 11px; color: #8B7355; margin-top: 4px;
+  padding: 6px 10px; background: rgba(255,243,220,0.5);
+  border-radius: 8px; border-left: 3px solid rgba(160,120,80,0.4);
+}
+
 /* BOOKING CHECKLIST */
 .booking-section-label {
   font-size: 11px; font-weight: 800; letter-spacing: 1.2px;
@@ -875,6 +961,7 @@ body::before {
   <button class="nav-tab" onclick="showTab('food')">🍽️ Food</button>
   <button class="nav-tab" onclick="showTab('tips')">💡 Tips</button>
   <button class="nav-tab" onclick="showTab('booking')">📋 Bookings</button>
+  <button class="nav-tab" onclick="showTab('transport')">🗺️ Getting Around</button>
 </div>
 
 <div class="content">
@@ -2680,6 +2767,716 @@ body::before {
 
 </div>
 
+<!-- ======== GETTING AROUND TAB ======== -->
+<div id="tab-transport" class="tab-pane">
+
+  <!-- DAY 1 -->
+  <div class="travel-day open" id="td-1">
+    <div class="travel-day-header" onclick="toggleTravel('td-1')">
+      <div class="travel-day-date">17 Jun · Wed</div>
+      <div class="travel-day-title">Singapore Changi → Kuala Lumpur</div>
+      <div class="travel-day-toggle">⌄</div>
+    </div>
+    <div class="travel-day-body">
+
+      <div class="travel-step">
+        <div class="travel-mode-dot walk">🚶</div>
+        <div class="travel-leg">
+          <div class="travel-route">Arrival Gate <span class="arrow">→</span> Jewel Changi</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚶 Walk (inside terminal)</span>
+            <span class="travel-chip time">⏱ 5 min</span>
+            <span class="travel-chip free">💚 Free</span>
+          </div>
+          <div class="travel-note">Connected to T1/T2/T3 — follow JEWEL signs after landing, no immigration needed.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot bus">🚌</div>
+        <div class="travel-leg">
+          <div class="travel-route">KLIA T1 <span class="arrow">→</span> KL Sentral</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚌 Airport Bus</span>
+            <span class="travel-chip time">⏱ ~1 hr</span>
+            <span class="travel-chip cost">💰 Booked · 5:40 PM</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/KLIA+Terminal+1/KL+Sentral+Station" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">KL Sentral <span class="arrow">→</span> The Colony Infinitum</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~10 min</span>
+            <span class="travel-chip cost">💰 MYR 10–15</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/KL+Sentral/The+Colony+Infinitum+Jalan+Dewan+Sultan+Sulaiman+Kuala+Lumpur" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Hotel <span class="arrow">→</span> KLCC / Twin Towers</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~10 min</span>
+            <span class="travel-chip cost">💰 MYR 12–18</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/The+Colony+Infinitum+Kuala+Lumpur/Petronas+Twin+Towers+KLCC" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">KLCC <span class="arrow">→</span> Jalan Alor Night Market</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~8 min</span>
+            <span class="travel-chip cost">💰 MYR 8–12</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/KLCC+Kuala+Lumpur/Jalan+Alor+Kuala+Lumpur" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="travel-day" id="td-2">
+    <div class="travel-day-header" onclick="toggleTravel('td-2')">
+      <div class="travel-day-date">18 Jun · Thu</div>
+      <div class="travel-day-title">KL Full Day — Caves · Chinatown · Sky Bar</div>
+      <div class="travel-day-toggle">⌄</div>
+    </div>
+    <div class="travel-day-body">
+
+      <div class="travel-step">
+        <div class="travel-mode-dot mrt">🚇</div>
+        <div class="travel-leg">
+          <div class="travel-route">Hotel <span class="arrow">→</span> Batu Caves</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚇 KTM Komuter</span>
+            <span class="travel-chip time">⏱ ~40 min</span>
+            <span class="travel-chip cost">💰 MYR 3 pp</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/KL+Sentral/Batu+Caves+Station" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Take KTM Komuter from KL Sentral → Batu Caves (direct, ~35 min). Way cheaper than Grab and drops you right at the caves!</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Batu Caves <span class="arrow">→</span> Thean Hou Temple</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~25 min</span>
+            <span class="travel-chip cost">💰 MYR 15–22</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Batu+Caves/Thean+Hou+Temple+Kuala+Lumpur" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Thean Hou Temple <span class="arrow">→</span> Petaling Street</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~12 min</span>
+            <span class="travel-chip cost">💰 MYR 8–12</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Thean+Hou+Temple+Kuala+Lumpur/Petaling+Street+Kuala+Lumpur" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot walk">🚶</div>
+        <div class="travel-leg">
+          <div class="travel-route">Petaling Street <span class="arrow">→</span> REX KL BookXcess</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚶 Walk</span>
+            <span class="travel-chip time">⏱ ~3 min</span>
+            <span class="travel-chip free">💚 Free</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Petaling+Street+Kuala+Lumpur/REX+KL+BookXcess" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot walk">🚶</div>
+        <div class="travel-leg">
+          <div class="travel-route">REX KL <span class="arrow">→</span> Merdeka Square</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚶 Walk</span>
+            <span class="travel-chip time">⏱ ~10 min</span>
+            <span class="travel-chip free">💚 Free</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/REX+KL+BookXcess/Dataran+Merdeka+Kuala+Lumpur" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot mrt">🚇</div>
+        <div class="travel-leg">
+          <div class="travel-route">Merdeka Square <span class="arrow">→</span> Sky Bar, Traders Hotel</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚇 MRT + Walk</span>
+            <span class="travel-chip time">⏱ ~20 min</span>
+            <span class="travel-chip cost">💰 MYR 2–3</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Dataran+Merdeka+Kuala+Lumpur/Traders+Hotel+Kuala+Lumpur+KLCC" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">MRT Pasar Seni → KLCC station (2 stops), then 5 min walk to Traders Hotel.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot mrt">🚇</div>
+        <div class="travel-leg">
+          <div class="travel-route">Sky Bar <span class="arrow">→</span> Bukit Bintang (Lot 10)</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚇 Monorail</span>
+            <span class="travel-chip time">⏱ ~15 min</span>
+            <span class="travel-chip cost">💰 MYR 1.60</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/KLCC+Station/Bukit+Bintang+Station" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Or Grab if you prefer — MYR 10–15, ~8 min.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="travel-day" id="td-3">
+    <div class="travel-day-header" onclick="toggleTravel('td-3')">
+      <div class="travel-day-date">19 Jun · Fri</div>
+      <div class="travel-day-title">KL Tower → Airport → Langkawi</div>
+      <div class="travel-day-toggle">⌄</div>
+    </div>
+    <div class="travel-day-body">
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Hotel <span class="arrow">→</span> KL Tower</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~10 min</span>
+            <span class="travel-chip cost">💰 MYR 10–15</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/The+Colony+Infinitum+Kuala+Lumpur/KL+Tower+Menara+Kuala+Lumpur" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">KL Tower <span class="arrow">→</span> KL Sentral</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~12 min</span>
+            <span class="travel-chip cost">💰 MYR 12–18</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Menara+KL+Tower/KL+Sentral" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Leave KL Tower by 11:30 AM to catch the 12:20 PM bus to KLIA.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot bus">🚌</div>
+        <div class="travel-leg">
+          <div class="travel-route">KL Sentral <span class="arrow">→</span> KLIA T1</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚌 Airport Bus</span>
+            <span class="travel-chip time">⏱ ~1 hr</span>
+            <span class="travel-chip cost">💰 Booked · 12:20 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot flight">✈️</div>
+        <div class="travel-leg">
+          <div class="travel-route">KUL <span class="arrow">→</span> Langkawi (LGK)</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">✈️ Flight</span>
+            <span class="travel-chip time">⏱ ~1 hr</span>
+            <span class="travel-chip cost">💰 Booked · Departs 15:50</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Langkawi Airport <span class="arrow">→</span> Frangipani Resort</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab / Taxi</span>
+            <span class="travel-chip time">⏱ ~25 min</span>
+            <span class="travel-chip cost">💰 MYR 25–35</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Langkawi+International+Airport/The+Frangipani+Langkawi+Resort" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Grab works in Langkawi but can be slow — ask hotel to arrange airport pickup in advance.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="travel-day" id="td-4">
+    <div class="travel-day-header" onclick="toggleTravel('td-4')">
+      <div class="travel-day-date">20 Jun · Sat</div>
+      <div class="travel-day-title">Beach · Sky Cab · Sunset Cruise · The Cliff</div>
+      <div class="travel-day-toggle">⌄</div>
+    </div>
+    <div class="travel-day-body">
+
+      <div class="travel-step">
+        <div class="travel-mode-dot walk">🚶</div>
+        <div class="travel-leg">
+          <div class="travel-route">Frangipani Resort <span class="arrow">→</span> Pantai Cenang Beach</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚶 Walk</span>
+            <span class="travel-chip time">⏱ ~5 min</span>
+            <span class="travel-chip free">💚 Free</span>
+          </div>
+          <div class="travel-note">Resort is steps from the beach — just walk out!</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Pantai Cenang <span class="arrow">→</span> Sky Cab (Oriental Village)</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~20 min</span>
+            <span class="travel-chip cost">💰 MYR 15–22</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Pantai+Cenang+Langkawi/Langkawi+Cable+Car+Oriental+Village" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Sky Cab <span class="arrow">→</span> Sunset Cruise Jetty</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~5 min</span>
+            <span class="travel-chip cost">💰 MYR 8–12</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Langkawi+Cable+Car/Pantai+Kok+Langkawi" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Sunset cruises depart from Pantai Kok — very close to Oriental Village. Confirm pickup point when booking.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Sunset Cruise <span class="arrow">→</span> The Cliff Restaurant</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~10 min</span>
+            <span class="travel-chip cost">💰 MYR 10–15</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Pantai+Kok+Langkawi/The+Cliff+Restaurant+Langkawi" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">The Cliff <span class="arrow">→</span> Frangipani Resort</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~20 min</span>
+            <span class="travel-chip cost">💰 MYR 15–22</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/The+Cliff+Restaurant+Langkawi/The+Frangipani+Langkawi+Resort" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="travel-day" id="td-5">
+    <div class="travel-day-header" onclick="toggleTravel('td-5')">
+      <div class="travel-day-date">21 Jun · Sun</div>
+      <div class="travel-day-title">Mangroves · Pregnant Maiden Lake · Dream Forest</div>
+      <div class="travel-day-toggle">⌄</div>
+    </div>
+    <div class="travel-day-body">
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Resort <span class="arrow">→</span> Kilim Jetty (Mangrove Tour)</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~35 min</span>
+            <span class="travel-chip cost">💰 MYR 25–35</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/The+Frangipani+Langkawi/Kilim+Jetty+Langkawi" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Ask tour operator if they offer hotel pickup — many do for free!</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot walk">🚶</div>
+        <div class="travel-leg">
+          <div class="travel-route">Kilim <span class="arrow">→</span> Pregnant Maiden Lake</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚤 Boat (part of tour)</span>
+            <span class="travel-chip time">⏱ Included in tour</span>
+            <span class="travel-chip cost">💰 Included</span>
+          </div>
+          <div class="travel-note">Pulau Dayang Bunting is a stop on the standard island-hopping mangrove tour.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Kilim Jetty <span class="arrow">→</span> Resort</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~35 min</span>
+            <span class="travel-chip cost">💰 MYR 25–35</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Resort <span class="arrow">→</span> Dream Forest Langkawi</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~20 min</span>
+            <span class="travel-chip cost">💰 MYR 15–22</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/The+Frangipani+Langkawi/Dream+Forest+Langkawi" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Opens at 7 PM — book Grab in advance as late-night rides can be scarce in Langkawi.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="travel-day" id="td-6">
+    <div class="travel-day-header" onclick="toggleTravel('td-6')">
+      <div class="travel-day-date">22 Jun · Mon</div>
+      <div class="travel-day-title">Langkawi → KL · Malls & Shopping</div>
+      <div class="travel-day-toggle">⌄</div>
+    </div>
+    <div class="travel-day-body">
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Frangipani Resort <span class="arrow">→</span> Langkawi Airport</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab / Taxi</span>
+            <span class="travel-chip time">⏱ ~25 min</span>
+            <span class="travel-chip cost">💰 MYR 22–30</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/The+Frangipani+Langkawi/Langkawi+International+Airport" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Check out by 9:30 AM — Grab by 9:45 AM for the 11:15 flight.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot flight">✈️</div>
+        <div class="travel-leg">
+          <div class="travel-route">Langkawi (LGK) <span class="arrow">→</span> KL (KLIA)</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">✈️ Flight</span>
+            <span class="travel-chip time">⏱ ~1 hr</span>
+            <span class="travel-chip cost">💰 Booked · 11:15 AM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot train">🚆</div>
+        <div class="travel-leg">
+          <div class="travel-route">KLIA <span class="arrow">→</span> KL Sentral</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚆 KLIA Ekspres</span>
+            <span class="travel-chip time">⏱ 28 min</span>
+            <span class="travel-chip cost">💰 Booked · MYR 55 pp</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/KLIA+Terminal+1/KL+Sentral+Station" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">KL Sentral <span class="arrow">→</span> KL Airbnb (Robertson)</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~10 min</span>
+            <span class="travel-chip cost">💰 MYR 10–15</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/KL+Sentral/Jalan+Robertson+Kuala+Lumpur" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Don't forget to pick up stored luggage from The Colony Infinitum on the way!</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Airbnb <span class="arrow">→</span> Pavilion KL / KLCC / TRX</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~8–12 min</span>
+            <span class="travel-chip cost">💰 MYR 10–18</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Jalan+Robertson+Kuala+Lumpur/Pavilion+KL" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="travel-day" id="td-7">
+    <div class="travel-day-header" onclick="toggleTravel('td-7')">
+      <div class="travel-day-date">23 Jun · Tue</div>
+      <div class="travel-day-title">Day Trip to Malacca</div>
+      <div class="travel-day-toggle">⌄</div>
+    </div>
+    <div class="travel-day-body">
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Airbnb <span class="arrow">→</span> TBS Bus Terminal</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~15 min</span>
+            <span class="travel-chip cost">💰 MYR 12–18</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Jalan+Robertson+Kuala+Lumpur/Terminal+Bersepadu+Selatan+TBS" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Leave by 7:30 AM for the 8 AM bus — buses run every 30 min from TBS (Terminal Bersepadu Selatan).</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot bus">🚌</div>
+        <div class="travel-leg">
+          <div class="travel-route">TBS KL <span class="arrow">→</span> Malacca Sentral</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚌 Bus</span>
+            <span class="travel-chip time">⏱ ~2 hrs</span>
+            <span class="travel-chip cost">💰 MYR 20 pp</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Terminal+Bersepadu+Selatan/Melaka+Sentral+Bus+Terminal" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Malacca Sentral <span class="arrow">→</span> Dutch Square</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~12 min</span>
+            <span class="travel-chip cost">💰 MYR 8–12</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Melaka+Sentral/Dutch+Square+Malacca" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot walk">🚶</div>
+        <div class="travel-leg">
+          <div class="travel-route">Dutch Square <span class="arrow">→</span> A Famosa → St Paul's Hill → Jonker Walk</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚶 Walk</span>
+            <span class="travel-chip time">⏱ All walkable</span>
+            <span class="travel-chip free">💚 Free</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Dutch+Square+Malacca/A+Famosa+Fort+Malacca/St+Pauls+Hill+Malacca/Jonker+Street+Malacca" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">The entire heritage zone is compact and walkable — Dutch Square to Jonker Walk is just 10 min on foot.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Jonker Walk <span class="arrow">→</span> Malacca Sentral</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~12 min</span>
+            <span class="travel-chip cost">💰 MYR 8–12</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Jonker+Street+Malacca/Melaka+Sentral+Bus+Terminal" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot bus">🚌</div>
+        <div class="travel-leg">
+          <div class="travel-route">Malacca Sentral <span class="arrow">→</span> TBS KL</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚌 Bus</span>
+            <span class="travel-chip time">⏱ ~2 hrs</span>
+            <span class="travel-chip cost">💰 MYR 20 pp</span>
+          </div>
+          <div class="travel-note">Last buses back to KL run until 10 PM — aim for 7–8 PM to arrive by 9–10 PM.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">TBS KL <span class="arrow">→</span> Airbnb</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~15 min</span>
+            <span class="travel-chip cost">💰 MYR 12–18</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Terminal+Bersepadu+Selatan/Jalan+Robertson+Kuala+Lumpur" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div class="travel-day" id="td-8">
+    <div class="travel-day-header" onclick="toggleTravel('td-8')">
+      <div class="travel-day-date">24 Jun · Wed</div>
+      <div class="travel-day-title">Genting Highlands — SkyWorlds</div>
+      <div class="travel-day-toggle">⌄</div>
+    </div>
+    <div class="travel-day-body">
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Airbnb <span class="arrow">→</span> Pudu Raya Bus Terminal</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~10 min</span>
+            <span class="travel-chip cost">💰 MYR 10–15</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Jalan+Robertson+Kuala+Lumpur/Pudu+Raya+Bus+Terminal+Kuala+Lumpur" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Leave by 8 AM — first Genting buses run from 7 AM.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot bus">🚌</div>
+        <div class="travel-leg">
+          <div class="travel-route">Pudu Raya <span class="arrow">→</span> Genting Cable Car Station</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚌 Bus</span>
+            <span class="travel-chip time">⏱ ~1 hr</span>
+            <span class="travel-chip cost">💰 MYR 10 pp</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Pudu+Raya+Bus+Terminal/Awana+Skyway+Cable+Car+Genting" target="_blank">📍 Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot train">🚡</div>
+        <div class="travel-leg">
+          <div class="travel-route">Awana Station <span class="arrow">→</span> Genting Skyway (top)</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚡 Awana Skyway Cable Car</span>
+            <span class="travel-chip time">⏱ ~10 min</span>
+            <span class="travel-chip cost">💰 MYR 8–15 pp</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Awana+Genting/Genting+SkyWorlds+Theme+Park" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Cable car runs every few minutes. Bring a jacket — it's ~20°C at the top!</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot bus">🚌</div>
+        <div class="travel-leg">
+          <div class="travel-route">Genting <span class="arrow">→</span> Pudu Raya → Airbnb</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚌 Bus + 🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~1.5 hrs total</span>
+            <span class="travel-chip cost">💰 MYR 10 + 12–18</span>
+          </div>
+          <div class="travel-note">Last bus back is ~11 PM. Book Grab from Pudu Raya to Airbnb on arrival.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 9 -->
+  <div class="travel-day" id="td-9">
+    <div class="travel-day-header" onclick="toggleTravel('td-9')">
+      <div class="travel-day-date">25 Jun · Thu</div>
+      <div class="travel-day-title">Last Day in KL → Departure</div>
+      <div class="travel-day-toggle">⌄</div>
+    </div>
+    <div class="travel-day-body">
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Airbnb <span class="arrow">→</span> Sunway Lagoon (optional)</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~25 min</span>
+            <span class="travel-chip cost">💰 MYR 20–28</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Jalan+Robertson+Kuala+Lumpur/Sunway+Lagoon+Theme+Park" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Or head to KLCC / Central Market for final shopping instead.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot grab">🚗</div>
+        <div class="travel-leg">
+          <div class="travel-route">Airbnb <span class="arrow">→</span> KL Sentral</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚗 Grab</span>
+            <span class="travel-chip time">⏱ ~10 min</span>
+            <span class="travel-chip cost">💰 MYR 10–15</span>
+            <a class="travel-map-btn" href="https://www.google.com/maps/dir/Jalan+Robertson+Kuala+Lumpur/KL+Sentral" target="_blank">📍 Maps</a>
+          </div>
+          <div class="travel-note">Leave Airbnb by 6:30 PM to comfortably make the 7 PM bus.</div>
+        </div>
+      </div>
+
+      <div class="travel-step">
+        <div class="travel-mode-dot bus">🚌</div>
+        <div class="travel-leg">
+          <div class="travel-route">KL Sentral <span class="arrow">→</span> KLIA T1</div>
+          <div class="travel-chips">
+            <span class="travel-chip mode">🚌 Airport Bus</span>
+            <span class="travel-chip time">⏱ ~1 hr</span>
+            <span class="travel-chip cost">💰 Booked · 7:00 PM</span>
+          </div>
+          <div class="travel-note">Flight KUL → SIN at 22:00. Arrive KLIA by 8 PM — plenty of time to check in.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
 </div>
 
 <script>
@@ -2720,6 +3517,11 @@ function updateBookingProgress() {
 
 // Init booking progress on load
 document.addEventListener('DOMContentLoaded', updateBookingProgress);
+
+function toggleTravel(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
 
 </script>
 </body>
