@@ -1133,6 +1133,192 @@ body.dark .photo-tip-text { color: #9A8870; }
 }
 .store-map-link:hover { color: #7A5C38; }
 
+/* ══════════════════════════════════════
+   BEAUTIFICATION ADDITIONS
+   ══════════════════════════════════════ */
+
+/* 1. STICKY NAV TABS */
+.nav-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: rgba(250,248,244,0.90);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(190,175,155,0.22);
+  padding-top: 12px;
+  margin: 0 -0px;
+  box-shadow: 0 4px 20px rgba(120,100,80,0.07);
+}
+body.dark .nav-tabs {
+  background: rgba(28,20,10,0.94) !important;
+  border-bottom-color: rgba(100,75,40,0.22);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+}
+
+/* 2. SCROLL-REVEAL ANIMATIONS */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3. ITINERARY TIMELINE CONNECTOR */
+#tab-itinerary .day-card {
+  position: relative;
+  margin-left: 20px;
+}
+#tab-itinerary .day-card::after {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 0;
+  bottom: -14px;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(139,111,71,0.35) 0%, rgba(139,111,71,0.08) 100%);
+  border-radius: 2px;
+}
+#tab-itinerary .day-card:last-child::after { display: none; }
+#tab-itinerary .day-card::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 24px;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #8B6F47, #C4A87A);
+  border-radius: 50%;
+  border: 2px solid rgba(250,248,244,0.9);
+  box-shadow: 0 2px 8px rgba(139,111,71,0.28);
+  z-index: 1;
+}
+body.dark #tab-itinerary .day-card::before { border-color: rgba(30,22,12,0.9); }
+#tab-itinerary .day-section-label { margin-left: 20px; }
+
+/* 4. BUDGET DONUT CHART */
+.budget-donut-wrap {
+  display: flex; align-items: center; gap: 20px;
+  background: rgba(255,255,255,0.55); backdrop-filter: blur(16px);
+  border-radius: 20px; padding: 18px 20px; margin-bottom: 16px;
+  border: 1px solid rgba(200,185,168,0.35);
+  box-shadow: 0 4px 18px rgba(120,100,80,0.07);
+}
+body.dark .budget-donut-wrap { background: rgba(45,32,15,0.78); border-color: rgba(100,75,40,0.25); }
+.budget-donut {
+  width: 110px; height: 110px; flex-shrink: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    #8FA8BA 0% 47%,
+    #8CABA0 47% 63%,
+    #BFA882 63% 80%,
+    #C0948A 80% 90%,
+    #9BB0A8 90% 94%,
+    #A8B8C0 94% 100%
+  );
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 18px rgba(120,100,80,0.18);
+}
+.budget-donut::after {
+  content: '💰'; position: absolute;
+  width: 66px; height: 66px; border-radius: 50%;
+  background: rgba(250,248,244,0.96); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  box-shadow: inset 0 1px 4px rgba(120,100,80,0.1);
+}
+body.dark .budget-donut::after { background: rgba(28,20,10,0.96); }
+.budget-donut-legend { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.bdl-item { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; color: #5E4E3E; }
+body.dark .bdl-item { color: #C8B098; }
+.bdl-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+/* 5. CUSTOM SCROLLBAR */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: rgba(230,220,208,0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: rgba(139,111,71,0.38); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(139,111,71,0.58); }
+body.dark ::-webkit-scrollbar-thumb { background: rgba(196,154,90,0.35); }
+
+/* 6. BACK TO TOP BUTTON */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 18px; z-index: 200;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.72); backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(190,175,155,0.45);
+  box-shadow: 0 6px 22px rgba(120,100,80,0.16);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transform: translateY(12px) scale(0.85);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.back-to-top.show { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+.back-to-top:hover { transform: translateY(-3px) scale(1.08); box-shadow: 0 10px 28px rgba(120,100,80,0.22); }
+body.dark .back-to-top { background: rgba(50,35,18,0.82); border-color: rgba(120,90,50,0.45); }
+
+/* 7. WEATHER CARD GRADIENTS */
+.weather-card.wc-hot   { background: linear-gradient(160deg,rgba(255,200,80,0.18),rgba(255,140,60,0.12)) !important; }
+.weather-card.wc-beach { background: linear-gradient(160deg,rgba(70,210,200,0.15),rgba(80,180,220,0.12)) !important; }
+.weather-card.wc-humid { background: linear-gradient(160deg,rgba(140,180,200,0.16),rgba(100,160,190,0.12)) !important; }
+.weather-card.wc-cool  { background: linear-gradient(160deg,rgba(180,210,240,0.20),rgba(200,225,250,0.15)) !important; }
+.weather-card.wc-hot .wc-temp   { color: #B05010; }
+.weather-card.wc-beach .wc-temp { color: #087090; }
+.weather-card.wc-humid .wc-temp { color: #3060A0; }
+.weather-card.wc-cool .wc-temp  { color: #3070B0; }
+body.dark .weather-card.wc-hot   { background: linear-gradient(160deg,rgba(180,100,20,0.22),rgba(140,80,20,0.15)) !important; }
+body.dark .weather-card.wc-beach { background: linear-gradient(160deg,rgba(20,120,130,0.22),rgba(20,90,140,0.15)) !important; }
+body.dark .weather-card.wc-humid { background: linear-gradient(160deg,rgba(40,80,120,0.22),rgba(30,60,100,0.15)) !important; }
+body.dark .weather-card.wc-cool  { background: linear-gradient(160deg,rgba(40,80,150,0.25),rgba(60,100,170,0.18)) !important; }
+
+/* 8. STAGGERED TAB CONTENT */
+.tab-pane.active > * { animation: none; }
+.tab-child-stagger { animation: tabChildIn 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+@keyframes tabChildIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 9. ENHANCED SECTION DIVIDERS */
+.day-section-label {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+}
+.day-section-label::before {
+  content: '';
+  width: 4px; height: 20px;
+  background: linear-gradient(180deg, #8B6F47, #C4A87A);
+  border-radius: 2px;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+.day-section-label::after {
+  content: '' !important;
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(139,111,71,0.25), transparent) !important;
+  margin-left: 4px;
+}
+body.dark .day-section-label::before { background: linear-gradient(180deg,#C49A5A,#8B6030); }
+
+/* 10. NOISE / GRAIN TEXTURE OVERLAY */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
 /* RESPONSIVE */
 @media (max-width: 400px) {
   .header .trip-title { font-size: 28px; }
@@ -1908,7 +2094,7 @@ body.dark .photo-tip-text { color: #9A8870; }
 <div id="tab-weather" class="tab-pane">
   <div class="day-section-label">☀️ June Weather Forecast</div>
   <div class="weather-grid">
-    <div class="weather-card">
+    <div class="weather-card wc-hot">
       <div class="wc-icon">🏙️</div>
       <div class="wc-place">Kuala Lumpur</div>
       <div class="wc-temp">28–34°C</div>
@@ -1916,7 +2102,7 @@ body.dark .photo-tip-text { color: #9A8870; }
       <div class="wc-stat">🌧️ Afternoon showers</div>
       <div class="wc-stat">☀️ UV: Extreme</div>
     </div>
-    <div class="weather-card">
+    <div class="weather-card wc-beach">
       <div class="wc-icon">🏝️</div>
       <div class="wc-place">Langkawi</div>
       <div class="wc-temp">27–33°C</div>
@@ -1924,7 +2110,7 @@ body.dark .photo-tip-text { color: #9A8870; }
       <div class="wc-stat">🌊 SW Monsoon</div>
       <div class="wc-stat">☀️ UV: Very high</div>
     </div>
-    <div class="weather-card">
+    <div class="weather-card wc-humid">
       <div class="wc-icon">🕌</div>
       <div class="wc-place">Putrajaya</div>
       <div class="wc-temp">27–33°C</div>
@@ -1932,7 +2118,7 @@ body.dark .photo-tip-text { color: #9A8870; }
       <div class="wc-stat">🌧️ Short showers</div>
       <div class="wc-stat">💧 High humidity</div>
     </div>
-    <div class="weather-card">
+    <div class="weather-card wc-cool">
       <div class="wc-icon">🎢</div>
       <div class="wc-place">Genting</div>
       <div class="wc-temp">15–22°C</div>
@@ -2110,6 +2296,17 @@ body.dark .photo-tip-text { color: #9A8870; }
     <div class="bt-label">Estimated Total (2 people)</div>
     <div class="bt-amt">MYR 6,749</div>
     <div class="bt-sub">≈ ₹1,26,202 · including flights from India</div>
+  </div>
+
+  <div class="budget-donut-wrap reveal">
+    <div class="budget-donut"></div>
+    <div class="budget-donut-legend">
+      <div class="bdl-item"><div class="bdl-dot" style="background:#8FA8BA"></div>Intl. Flights 47%</div>
+      <div class="bdl-item"><div class="bdl-dot" style="background:#8CABA0"></div>Domestic Flights 16%</div>
+      <div class="bdl-item"><div class="bdl-dot" style="background:#BFA882"></div>Accommodation 37%</div>
+      <div class="bdl-item"><div class="bdl-dot" style="background:#9BB0A8"></div>Transport 4%</div>
+      <div class="bdl-item"><div class="bdl-dot" style="background:#A8B8C0"></div>Activities 4%</div>
+    </div>
   </div>
 
   <div class="day-section-label">💸 Category Breakdown</div>
@@ -4092,12 +4289,25 @@ body.dark .photo-tip-text { color: #9A8870; }
 
 </div>
 
+<!-- Back to top button -->
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
 <script>
 function showTab(name) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
+  const pane = document.getElementById('tab-' + name);
+  pane.classList.add('active');
   event.target.classList.add('active');
+
+  /* 8. Staggered entrance for tab children */
+  const children = Array.from(pane.children);
+  children.forEach((el, i) => {
+    el.classList.remove('tab-child-stagger');
+    void el.offsetWidth;
+    el.style.animationDelay = (i * 0.055) + 's';
+    el.classList.add('tab-child-stagger');
+  });
 }
 
 function toggleCard(id) {
@@ -4198,6 +4408,37 @@ function copyPhrase(el, text) {
   el.classList.add('copied');
   setTimeout(() => el.classList.remove('copied'), 1800);
 }
+
+/* ── 2. SCROLL-REVEAL (IntersectionObserver) ── */
+(function() {
+  const revealTargets = [
+    '.day-card', '.flight-card', '.tip-card', '.weather-card',
+    '.pack-section', '.budget-row', '.budget-donut-wrap', '.budget-total',
+    '.stay-card', '.food-card', '.travel-day', '.booking-item',
+    '.phrase-card', '.photo-spot-card', '.converter-card'
+  ];
+  document.querySelectorAll(revealTargets.join(',')).forEach(el => {
+    el.classList.add('reveal');
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = (i * 0.04) + 's';
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+
+/* ── 6. BACK TO TOP ── */
+(function() {
+  const btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('show', window.scrollY > 320);
+  }, { passive: true });
+})();
 
 </script>
 </body>
