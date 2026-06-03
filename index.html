@@ -4141,27 +4141,26 @@ function toggleDark() {
   document.body.classList.toggle('dark');
   const isDark = document.body.classList.contains('dark');
   document.getElementById('dark-btn').textContent = isDark ? '☀️' : '🌙';
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch(e) {}
 }
-(function() {
+// Restore saved theme — script is at bottom so DOM is ready, no DOMContentLoaded needed
+try {
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark');
-    document.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('dark-btn');
-      if (btn) btn.textContent = '☀️';
-    });
+    const btn = document.getElementById('dark-btn');
+    if (btn) btn.textContent = '☀️';
   }
-})();
+} catch(e) {}
 
 /* ── COUNTDOWN TIMER ── */
 function updateCountdown() {
-  // Departure: Jun 16 2026 23:40 IST (UTC+5:30)
-  const dep = new Date('2026-06-16T23:40:00+05:30');
-  const now = new Date();
-  const diff = dep - now;
+  // Jun 16 2026 23:40 IST = Jun 16 2026 18:10 UTC  (month is 0-indexed → 5 = June)
+  const dep = new Date(Date.UTC(2026, 5, 16, 18, 10, 0));
+  const diff = dep - Date.now();
+  const wrap = document.getElementById('countdown-wrap');
+  if (!wrap) return;
   if (diff <= 0) {
-    document.getElementById('countdown-wrap').innerHTML =
-      '<div class="cd-done">🛫 You\'re on your way! Have an amazing trip! 🌴</div>';
+    wrap.innerHTML = '<div class="cd-done">🛫 You\'re on your way! Have an amazing trip! 🌴</div>';
     return;
   }
   const days = Math.floor(diff / 86400000);
