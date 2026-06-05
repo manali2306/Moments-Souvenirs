@@ -2309,8 +2309,8 @@ body::after {
 
   <div class="budget-total">
     <div class="bt-label">Estimated Total (2 people)</div>
-    <div class="bt-amt">MYR 6,749</div>
-    <div class="bt-sub">≈ ₹1,26,202 · including flights from India</div>
+    <div class="bt-amt">MYR 7,384</div>
+    <div class="bt-sub">≈ ₹1,38,082 · including flights from India</div>
   </div>
 
   <div class="budget-donut-wrap reveal">
@@ -2404,6 +2404,26 @@ body::after {
       <div class="br-bar-wrap"><div class="br-bar" style="width:2%;background:#A8B8C0;opacity:0.8;"></div></div>
     </div>
     <div class="br-amt"><div class="br-myr">MYR 94</div><div class="br-inr">₹1,765</div></div>
+  </div>
+
+  <div class="budget-row">
+    <div class="br-icon">🦅</div>
+    <div class="br-info">
+      <h4>Kilim Karst Mangrove Boat Tour</h4>
+      <p>Geoforest boat tour · 21 Jun · ✅ Confirmed</p>
+      <div class="br-bar-wrap"><div class="br-bar" style="width:6%;background:#8CABA0;opacity:0.8;"></div></div>
+    </div>
+    <div class="br-amt"><div class="br-myr">MYR 433</div><div class="br-inr">₹8,105</div></div>
+  </div>
+
+  <div class="budget-row">
+    <div class="br-icon">🌲</div>
+    <div class="br-info">
+      <h4>Dream Forest Langkawi — Night Rainforest</h4>
+      <p>Immersive night trail · 21 Jun (evening) · ✅ Confirmed</p>
+      <div class="br-bar-wrap"><div class="br-bar" style="width:3%;background:#9BB0A8;opacity:0.8;"></div></div>
+    </div>
+    <div class="br-amt"><div class="br-myr">MYR 202</div><div class="br-inr">₹3,775</div></div>
   </div>
 
   <div style="background:rgba(255,255,255,0.50);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:14px;padding:14px 18px;margin-top:10px;border:1px solid rgba(200,185,168,0.32);box-shadow:0 3px 12px rgba(120,100,80,0.06);">
@@ -4315,6 +4335,9 @@ function showTab(name) {
   pane.classList.add('active');
   event.target.classList.add('active');
 
+  /* Re-observe any reveal elements that were hidden when page loaded */
+  initReveal(pane);
+
   /* 8. Staggered entrance for tab children */
   const children = Array.from(pane.children);
   children.forEach((el, i) => {
@@ -4425,27 +4448,28 @@ function copyPhrase(el, text) {
 }
 
 /* ── 2. SCROLL-REVEAL (IntersectionObserver) ── */
-(function() {
-  const revealTargets = [
-    '.day-card', '.flight-card', '.tip-card', '.weather-card',
-    '.pack-section', '.budget-row', '.budget-donut-wrap', '.budget-total',
-    '.stay-card', '.food-card', '.travel-day', '.booking-item',
-    '.phrase-card', '.photo-spot-card', '.converter-card'
-  ];
-  document.querySelectorAll(revealTargets.join(',')).forEach(el => {
-    el.classList.add('reveal');
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealIO.unobserve(entry.target);
+    }
   });
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        entry.target.style.transitionDelay = (i * 0.04) + 's';
-        entry.target.classList.add('visible');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-})();
+}, { threshold: 0.06 });
+
+function initReveal(root) {
+  const targets = root.querySelectorAll(
+    '.day-card, .flight-card, .tip-card, .weather-card, ' +
+    '.pack-section, .budget-row, .budget-donut-wrap, .budget-total, ' +
+    '.stay-card, .food-card, .travel-day, .booking-item, ' +
+    '.phrase-card, .photo-spot-card, .converter-card'
+  );
+  targets.forEach(el => {
+    if (!el.classList.contains('reveal')) el.classList.add('reveal');
+    if (!el.classList.contains('visible')) revealIO.observe(el);
+  });
+}
+initReveal(document);
 
 /* ── 6. BACK TO TOP ── */
 (function() {
